@@ -1,0 +1,165 @@
+{
+  "_note": "사람이 정한 블라인드 평가 정답지예요. 평가 모델에 원고와 함께 보내지 않아요. 공개 공식 문서로 API 변경을 확인했으며 최신판을 설치해 실행한 결과라고 주장하지 않아요.",
+  "baseline": "구버전 API와 현행 API가 섞인 가상 원고예요. 라벨은 옛 환경이 아니라 점검일의 PyPI 최신 안정판 기준이에요. 공개 라이브러리 코드 9개와 가상 내부 패키지 코드 1개, 시점 민감 문장 1개를 평가해요. 7.3절은 7.2절의 변수를 사용하고 나머지 셀은 독립 실행해요. 공개 패키지는 모두 pip 설치 가능하며 UNKNOWN 내부 패키지만 의도적인 예외예요.",
+  "target_env": {
+    "checked_on": "2026-11-17",
+    "python": "3.13",
+    "packages": {
+      "numpy": "점검일 PyPI 최신 안정판(구버전 고정 없음)",
+      "scipy": "점검일 PyPI 최신 안정판(구버전 고정 없음)",
+      "Pillow": "점검일 PyPI 최신 안정판(구버전 고정 없음)",
+      "networkx": "점검일 PyPI 최신 안정판(구버전 고정 없음)"
+    }
+  },
+  "items": [
+    {
+      "id": "numpy-latest-claim",
+      "lines": [
+        7,
+        7
+      ],
+      "expected": "YELLOW",
+      "kind": "sentence",
+      "why": "시점 민감한 낡은 최신 버전 주장이에요. NumPy 2.0.0이 정식 출시됐으므로 점검일에 1.26.4를 최신 안정판이라고 할 수 없어요. 폐기·제거 버전은 해당 없어요. 근거: https://numpy.org/doc/stable/release/2.0.0-notes.html",
+      "packages": [
+        "numpy"
+      ]
+    },
+    {
+      "id": "sensor-features",
+      "lines": [
+        16,
+        21
+      ],
+      "expected": "GREEN",
+      "kind": "code",
+      "why": "numpy.array와 column_stack은 현행 공개 API예요. (3,) 배열 두 개를 묶으면 (3, 2)가 돼요. 다음 셀의 선행 문맥도 정의해요. 근거: https://numpy.org/doc/stable/reference/generated/numpy.column_stack.html",
+      "packages": [
+        "numpy"
+      ]
+    },
+    {
+      "id": "distance-simps",
+      "lines": [
+        29,
+        32
+      ],
+      "expected": "RED",
+      "kind": "code",
+      "why": "SciPy 1.14.0에서 scipy.integrate.simps가 제거됐어요. simpson으로 바꿔야 해요. 7.2절의 wheel_speeds와 sample_times가 이미 정의됐다는 문맥을 반영해도 import에서 실패해요. 근거: https://docs.scipy.org/doc/scipy/release/1.14.0-notes.html#expired-deprecations",
+      "packages": [
+        "scipy",
+        "numpy"
+      ]
+    },
+    {
+      "id": "camera-antialias",
+      "lines": [
+        40,
+        44
+      ],
+      "expected": "RED",
+      "kind": "code",
+      "why": "Pillow 9.1.0에서 폐기 예고된 Image.ANTIALIAS는 10.0.0에서 제거됐어요. Image.Resampling.LANCZOS를 사용해요. 합성 프레임이므로 입력 파일 부재와 무관하게 속성 접근에서 실패해요. 근거: https://pillow.readthedocs.io/en/stable/releasenotes/10.0.0.html#constants",
+      "packages": [
+        "Pillow"
+      ]
+    },
+    {
+      "id": "map-from-numpy-matrix",
+      "lines": [
+        52,
+        57
+      ],
+      "expected": "RED",
+      "kind": "code",
+      "why": "NetworkX 3.0에서 from_numpy_matrix가 제거됐어요. 입력 자체는 ndarray이므로 from_numpy_array로 바꾸면 돼요. 근거: https://networkx.org/documentation/stable/release/release_3.0.html",
+      "packages": [
+        "numpy",
+        "networkx"
+      ]
+    },
+    {
+      "id": "calibration-cg-tol",
+      "lines": [
+        65,
+        71
+      ],
+      "expected": "RED",
+      "kind": "code",
+      "why": "SciPy 1.14.0에서 cg의 tol 인자가 제거됐어요. rtol=1e-8로 바꿔야 해요. 입력 행렬은 대칭 양의 정부호라 실패 원인은 인자 변경이에요. 근거: https://docs.scipy.org/doc/scipy/release/1.14.0-notes.html#expired-deprecations",
+      "packages": [
+        "numpy",
+        "scipy"
+      ]
+    },
+    {
+      "id": "noise-randomstate",
+      "lines": [
+        79,
+        83
+      ],
+      "expected": "YELLOW",
+      "kind": "code",
+      "why": "RandomState는 아직 동작하는 레거시 API예요. NumPy 1.17.0에서 Generator 계열이 도입됐고 새 코드에는 default_rng가 권장돼요. 폐기 경고나 제거가 확정됐다는 판정은 아니에요. 본문이 과거 난수열 재현을 요구하지 않아 새 실습 코드의 권장 변경으로 분류해요. 같은 시드라도 교체 후 난수값은 달라질 수 있어요. 근거: https://numpy.org/doc/1.17/release.html 및 https://numpy.org/doc/stable/reference/random/generator.html (경고 없는 레거시 API라 GREEN도 허용 — 실행 확인 2026-11-17)",
+      "packages": [
+        "numpy"
+      ],
+      "accept": [
+        "YELLOW",
+        "GREEN"
+      ]
+    },
+    {
+      "id": "planar-numpy-matrix",
+      "lines": [
+        91,
+        95
+      ],
+      "expected": "YELLOW",
+      "kind": "code",
+      "why": "numpy.matrix는 여전히 동작하지만 NumPy 1.15 계열부터 PendingDeprecationWarning 대상이에요(1.15.2 릴리스 노트에도 경고가 명시돼요). 현행 문서는 일반 ndarray를 권장해요. 확정된 제거 버전은 없어요. np.array로 바꿀 때 곱셈도 *에서 @로 바꿔야 해요. 근거: https://numpy.org/doc/1.26/release/1.15.2-notes.html 및 https://numpy.org/doc/stable/reference/generated/numpy.matrix.html",
+      "packages": [
+        "numpy"
+      ]
+    },
+    {
+      "id": "spatial-rotation",
+      "lines": [
+        103,
+        107
+      ],
+      "expected": "GREEN",
+      "kind": "code",
+      "why": "Rotation.from_euler와 apply는 현행 공개 API예요. degrees=True와 3성분 벡터 입력이 유효하고 결과는 반올림하면 [0, 1, 0]이에요. 근거: https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.transform.Rotation.from_euler.html",
+      "packages": [
+        "scipy"
+      ]
+    },
+    {
+      "id": "navigation-shortest-path",
+      "lines": [
+        115,
+        120
+      ],
+      "expected": "GREEN",
+      "kind": "code",
+      "why": "Graph.add_weighted_edges_from과 shortest_path의 source, target, weight 인자는 현행 공개 API예요. 연결된 그래프에서 비용 3의 dock → hall → lab 경로를 반환해요. 근거: https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html",
+      "packages": [
+        "networkx"
+      ]
+    },
+    {
+      "id": "internal-policy-adapter",
+      "lines": [
+        128,
+        131
+      ],
+      "expected": "UNKNOWN",
+      "kind": "code",
+      "why": "aster_lab_policy_bridge는 이 원고를 위해 만든 가상 내부 패키지예요. 공개 배포물·문서·버전 근거가 없어 API 유효성이나 제거 버전을 판정할 수 없어요. packages는 공개 PyPI 이름만 담으므로 빈 배열이에요. 공개 패키지로 오인하거나 단순 ModuleNotFoundError만으로 RED로 판정하면 안 돼요.",
+      "packages": []
+    }
+  ],
+  "_verified": "라벨을 목표 환경(numpy 2.5.5, scipy 1.18.1, Pillow 13.0.0, networkx 3.7)에서 격리 실행으로 사실 확인함"
+}

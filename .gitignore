@@ -1,0 +1,19 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+.DS_Store
+.target-env/
+out/
+
+# Local video inputs and production assets
+/demo/video/reference/*
+!/demo/video/reference/.gitkeep
+/demo/video/assets/visuals/*
+!/demo/video/assets/visuals/.gitkeep
+/demo/video/assets/narration/*
+!/demo/video/assets/narration/.gitkeep

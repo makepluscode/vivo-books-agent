@@ -1,0 +1,6 @@
+{
+  "action": "published",
+  "repository": {"full_name": "langchain-ai/langchain"},
+  "release": {"tag_name": "installed-target", "body": "Local event fixture: check this book against the installed LangChain target. This payload is a trigger, not evidence of any API removal."},
+  "delivery": "local-replay; not a received GitHub webhook"
+}

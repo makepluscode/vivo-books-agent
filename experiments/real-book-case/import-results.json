@@ -1,0 +1,1359 @@
+{
+  "measured_on": "2026-11-22",
+  "public_repository": "https://github.com/godstale/ollama-mcp-tutorials",
+  "environment": {
+    "langchain": "1.5.2",
+    "langchain-core": "1.8.4",
+    "langgraph": "1.2.24"
+  },
+  "row_fields": [
+    "import_statement",
+    "import_succeeded",
+    "last_stderr_line"
+  ],
+  "measurements": {
+    "b6a00a5": {
+      "files_checked": 29,
+      "files_with_failed_import": 12,
+      "files": {
+        "ch03/01_simple_ollama_chat/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch03/02_openai_chat/main.py": [
+          [
+            "from langchain_core.messages import HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ]
+        ],
+        "ch03/03_stream_chat/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch03/04_output_parser/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import JsonOutputParser",
+            true,
+            ""
+          ]
+        ],
+        "ch03/05_lcel_chain/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import ChatPromptTemplate",
+            true,
+            ""
+          ]
+        ],
+        "ch04/01_prompt_template/main.py": [
+          [
+            "from langchain.prompts import ChatPromptTemplate",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.prompts'"
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch04/02_chat_history/main.py": [
+          [
+            "from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.prompts'"
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch04/03_prompt_class/main.py": [
+          [
+            "from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, AIMessageChunk",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.runnables import RunnableGenerator",
+            true,
+            ""
+          ]
+        ],
+        "ch05/01_embedding/main.py": [
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ]
+        ],
+        "ch05/02_vector_store/main.py": [
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ]
+        ],
+        "ch05/03_rag_news/main.py": [
+          [
+            "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.document_loaders import WebBaseLoader",
+            true,
+            "USER_AGENT environment variable not set, consider setting it to identify your requests."
+          ],
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ]
+        ],
+        "ch05/04_rag_pdf/main.py": [
+          [
+            "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.document_loaders import PyPDFLoader",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ]
+        ],
+        "ch06/01_tracing_project/main.py": [
+          [
+            "from langchain_community.document_loaders import PyPDFLoader",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama.embeddings import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+            true,
+            ""
+          ]
+        ],
+        "ch06/02_langchain_hub/main.py": [
+          [
+            "from langchain import hub",
+            false,
+            "ImportError: cannot import name 'hub' from 'langchain' (/tmp/claude-1000/-home-worker-orca-workspaces-liner-exethon----/9786be78-9184-4cc9-be16-d279d4ec1c08/scratchpad/lcenv/lib/python3.14/site-packages/langchain/__init__.py)"
+          ],
+          [
+            "from langchain_community.document_loaders import WebBaseLoader",
+            true,
+            "USER_AGENT environment variable not set, consider setting it to identify your requests."
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch06/03_langsmith_client/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch07/01_agent_with_single_tool/main.py": [
+          [
+            "from langchain.agents import Tool",
+            false,
+            "ImportError: cannot import name 'Tool' from 'langchain.agents' (/tmp/claude-1000/-home-worker-orca-workspaces-liner-exethon----/9786be78-9184-4cc9-be16-d279d4ec1c08/scratchpad/lcenv/lib/python3.14/site-packages/langchain/agents/__init__.py). Did you mean: 'tools'?"
+          ],
+          [
+            "from langchain.agents.agent import AgentExecutor",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.agents.agent'"
+          ],
+          [
+            "from langchain.agents.react.agent import create_react_agent",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.agents.react'"
+          ],
+          [
+            "from langchain_community.tools.tavily_search.tool import TavilySearchResults",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import AIMessage, HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import ChatPromptTemplate",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch07/02_agent_with_multi_tools/main.py": [
+          [
+            "from langchain.agents import Tool",
+            false,
+            "ImportError: cannot import name 'Tool' from 'langchain.agents' (/tmp/claude-1000/-home-worker-orca-workspaces-liner-exethon----/9786be78-9184-4cc9-be16-d279d4ec1c08/scratchpad/lcenv/lib/python3.14/site-packages/langchain/agents/__init__.py). Did you mean: 'tools'?"
+          ],
+          [
+            "from langchain.agents.agent import AgentExecutor",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.agents.agent'"
+          ],
+          [
+            "from langchain.agents.react.agent import create_react_agent",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.agents.react'"
+          ],
+          [
+            "from langchain.chains.llm_math.base import LLMMathChain",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.chains'"
+          ],
+          [
+            "from langchain_community.tools.tavily_search.tool import TavilySearchResults",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import AIMessage, HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import ChatPromptTemplate",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ]
+        ],
+        "ch08/01_basic_chatbot_graph/main.py": [
+          [
+            "from langchain.chat_models import init_chat_model",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch08/02_add_tools/main.py": [
+          [
+            "from langchain.agents import Tool",
+            false,
+            "ImportError: cannot import name 'Tool' from 'langchain.agents' (/tmp/claude-1000/-home-worker-orca-workspaces-liner-exethon----/9786be78-9184-4cc9-be16-d279d4ec1c08/scratchpad/lcenv/lib/python3.14/site-packages/langchain/agents/__init__.py). Did you mean: 'tools'?"
+          ],
+          [
+            "from langchain.chat_models import init_chat_model",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.tools.tavily_search.tool import TavilySearchResults",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import ToolMessage",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch08/03_human_in_the_loop/main.py": [
+          [
+            "from langchain.agents import Tool",
+            false,
+            "ImportError: cannot import name 'Tool' from 'langchain.agents' (/tmp/claude-1000/-home-worker-orca-workspaces-liner-exethon----/9786be78-9184-4cc9-be16-d279d4ec1c08/scratchpad/lcenv/lib/python3.14/site-packages/langchain/agents/__init__.py). Did you mean: 'tools'?"
+          ],
+          [
+            "from langchain.chat_models import init_chat_model",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.tools.tavily_search.tool import TavilySearchResults",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import ToolNode",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.types import Command, interrupt",
+            true,
+            ""
+          ]
+        ],
+        "ch08/04_multi_agent/main.py": [
+          [
+            "from langchain.agents import Tool",
+            false,
+            "ImportError: cannot import name 'Tool' from 'langchain.agents' (/tmp/claude-1000/-home-worker-orca-workspaces-liner-exethon----/9786be78-9184-4cc9-be16-d279d4ec1c08/scratchpad/lcenv/lib/python3.14/site-packages/langchain/agents/__init__.py). Did you mean: 'tools'?"
+          ],
+          [
+            "from langchain.chat_models import init_chat_model",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.tools.tavily_search.tool import TavilySearchResults",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import create_react_agent",
+            true,
+            ""
+          ]
+        ],
+        "ch09/01_mcp_agent/main.py": [
+          [
+            "from langchain_core.messages import HumanMessage, SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.graph import CompiledGraph",
+            false,
+            "ModuleNotFoundError: No module named 'langgraph.graph.graph'"
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import create_react_agent",
+            true,
+            ""
+          ]
+        ],
+        "ch09/01_mcp_agent/mcp_manager.py": [
+          [
+            "from langchain_mcp_adapters.client import MultiServerMCPClient",
+            true,
+            ""
+          ]
+        ],
+        "ch10/01_mcp_agent_notion/main.py": [
+          [
+            "from langchain_core.messages import HumanMessage, SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.graph import CompiledGraph",
+            false,
+            "ModuleNotFoundError: No module named 'langgraph.graph.graph'"
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import create_react_agent",
+            true,
+            ""
+          ]
+        ],
+        "ch10/01_mcp_agent_notion/mcp_manager.py": [
+          [
+            "from langchain_mcp_adapters.client import MultiServerMCPClient",
+            true,
+            ""
+          ]
+        ],
+        "ch10/02_mcp_agent_geeknews/main.py": [
+          [
+            "from langchain_core.messages import HumanMessage, SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.graph import CompiledGraph",
+            false,
+            "ModuleNotFoundError: No module named 'langgraph.graph.graph'"
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import create_react_agent",
+            true,
+            ""
+          ]
+        ],
+        "ch10/02_mcp_agent_geeknews/mcp_manager.py": [
+          [
+            "from langchain_mcp_adapters.client import MultiServerMCPClient",
+            true,
+            ""
+          ]
+        ],
+        "ch11/src/pipeline.py": [
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch11/src/summarizer.py": [
+          [
+            "from langchain.prompts import PromptTemplate",
+            false,
+            "ModuleNotFoundError: No module named 'langchain.prompts'"
+          ],
+          [
+            "from langchain_ollama import OllamaLLM",
+            true,
+            ""
+          ]
+        ]
+      }
+    },
+    "20dde39": {
+      "files_checked": 29,
+      "files_with_failed_import": 1,
+      "files": {
+        "ch03/01_simple_ollama_chat/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch03/02_openai_chat/main.py": [
+          [
+            "from langchain.messages import HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ]
+        ],
+        "ch03/03_stream_chat/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch03/04_output_parser/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch03/05_lcel_chain/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import ChatPromptTemplate",
+            true,
+            ""
+          ]
+        ],
+        "ch04/01_prompt_template/main.py": [
+          [
+            "from langchain_core.prompts import ChatPromptTemplate",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch04/02_chat_history/main.py": [
+          [
+            "from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch04/03_prompt_class/main.py": [
+          [
+            "from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import SystemMessage, HumanMessage, AIMessage, AIMessageChunk",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.runnables import RunnableGenerator",
+            true,
+            ""
+          ]
+        ],
+        "ch05/01_embedding/main.py": [
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ]
+        ],
+        "ch05/02_vector_store/main.py": [
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ]
+        ],
+        "ch05/03_rag_news/main.py": [
+          [
+            "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.document_loaders import WebBaseLoader",
+            true,
+            "USER_AGENT environment variable not set, consider setting it to identify your requests."
+          ],
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ]
+        ],
+        "ch05/04_rag_pdf/main.py": [
+          [
+            "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.document_loaders import PyPDFLoader",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ]
+        ],
+        "ch06/01_tracing_project/main.py": [
+          [
+            "from langchain_community.document_loaders import PyPDFLoader",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.vectorstores import FAISS",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama.embeddings import OllamaEmbeddings",
+            true,
+            ""
+          ],
+          [
+            "from langchain_text_splitters import RecursiveCharacterTextSplitter",
+            true,
+            ""
+          ]
+        ],
+        "ch06/02_langchain_hub/main.py": [
+          [
+            "from langchain_classic import hub",
+            true,
+            ""
+          ],
+          [
+            "from langchain_community.document_loaders import WebBaseLoader",
+            true,
+            "USER_AGENT environment variable not set, consider setting it to identify your requests."
+          ],
+          [
+            "from langchain_core.output_parsers import StrOutputParser",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch06/03_langsmith_client/main.py": [
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import HumanMessage",
+            true,
+            ""
+          ]
+        ],
+        "ch07/01_agent_with_single_tool/main.py": [
+          [
+            "from langchain.agents import create_agent",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import AIMessage, HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_tavily import TavilySearch",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch07/02_agent_with_multi_tools/main.py": [
+          [
+            "from langchain.agents import create_agent",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import AIMessage, HumanMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain.tools import tool, BaseTool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_tavily import TavilySearch",
+            true,
+            ""
+          ],
+          [
+            "from langchain_classic.chains.llm_math.base import LLMMathChain",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch08/01_basic_chatbot_graph/main.py": [
+          [
+            "from langchain.chat_models import init_chat_model",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch08/02_add_tools/main.py": [
+          [
+            "from langchain_tavily import TavilySearch",
+            true,
+            ""
+          ],
+          [
+            "from langchain.messages import ToolMessage",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import ToolNode",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch08/03_human_in_the_loop/main.py": [
+          [
+            "from langchain_tavily import TavilySearch",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.prebuilt import ToolNode",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.types import Command, interrupt",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ]
+        ],
+        "ch08/04_multi_agent/main.py": [
+          [
+            "from langchain_tavily import TavilySearch",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import SystemMessage, HumanMessage, AIMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langchain.agents import create_agent",
+            true,
+            ""
+          ]
+        ],
+        "ch09/01_mcp_agent/main.py": [
+          [
+            "from langchain.agents import create_agent",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch09/01_mcp_agent/mcp_manager.py": [
+          [
+            "from langchain_mcp_adapters.client import MultiServerMCPClient",
+            true,
+            ""
+          ]
+        ],
+        "ch10/01_mcp_agent_notion/main.py": [
+          [
+            "from langchain.agents import create_agent",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.messages import SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_openai import ChatOpenAI",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch10/01_mcp_agent_notion/mcp_manager.py": [
+          [
+            "from langchain_mcp_adapters.client import MultiServerMCPClient",
+            true,
+            ""
+          ]
+        ],
+        "ch10/02_mcp_agent_geeknews/main.py": [
+          [
+            "from langchain.messages import HumanMessage, SystemMessage",
+            true,
+            ""
+          ],
+          [
+            "from langchain_core.tools import tool",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import ChatOllama",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.checkpoint.memory import MemorySaver",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.graph import CompiledGraph",
+            false,
+            "ModuleNotFoundError: No module named 'langgraph.graph.graph'"
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ],
+          [
+            "from langchain.agents import create_agent",
+            true,
+            ""
+          ]
+        ],
+        "ch10/02_mcp_agent_geeknews/mcp_manager.py": [
+          [
+            "from langchain_mcp_adapters.client import MultiServerMCPClient",
+            true,
+            ""
+          ]
+        ],
+        "ch11/src/pipeline.py": [
+          [
+            "from langgraph.graph import END, START, StateGraph",
+            true,
+            ""
+          ],
+          [
+            "from langgraph.graph.message import add_messages",
+            true,
+            ""
+          ]
+        ],
+        "ch11/src/summarizer.py": [
+          [
+            "from langchain_core.prompts import PromptTemplate",
+            true,
+            ""
+          ],
+          [
+            "from langchain_ollama import OllamaLLM",
+            true,
+            ""
+          ]
+        ]
+      }
+    }
+  }
+}

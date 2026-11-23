@@ -1,0 +1,14 @@
+{
+  "_note": "일반화 확인용(홀드아웃) 정답지. 3장 튜닝 이후에 만들었고, 라벨은 목표 환경 실제 실행으로 사실 확인함(2026-11-17).",
+  "target_env": {"checked_on": "2026-11-17", "packages": {"numpy": "2.5.5", "scikit-learn": "1.9.1", "pydantic": "2.14.3", "matplotlib": "3.11.2", "requests": "2.34.2"}},
+  "items": [
+    {"id": "python38-claims", "lines": [7, 7], "expected": "YELLOW", "kind": "sentence", "why": "Python 3.8은 2024-10 EOL. 최신 numpy 등은 3.8 미지원 — 시점 민감 문장"},
+    {"id": "requests-get", "lines": [12, 14], "expected": "GREEN", "kind": "code", "why": "현재 API 그대로 유효"},
+    {"id": "numpy-float-product", "lines": [20, 22], "expected": "RED", "kind": "code", "why": "np.float(1.24 제거), np.product(2.0 제거) → AttributeError 확인"},
+    {"id": "sklearn-boston", "lines": [28, 29], "expected": "RED", "kind": "code", "why": "load_boston 1.2에서 제거 → ImportError 확인"},
+    {"id": "pydantic-v1-api", "lines": [35, 44], "expected": "YELLOW", "kind": "code", "why": "validator·.dict()는 v2에서 PydanticDeprecatedSince20 경고, 동작은 함"},
+    {"id": "mpl-seaborn-style", "lines": [50, 52], "expected": "RED", "kind": "code", "why": "'seaborn' 스타일 이름 제거 → OSError 확인('seaborn-v0_8')"},
+    {"id": "numpy-sum", "lines": [58, 59], "expected": "GREEN", "kind": "code", "why": "현재 API 유효"},
+    {"id": "labx-lidar", "lines": [65, 66], "expected": "UNKNOWN", "kind": "code", "why": "공개 근거 없는 가상 내부 드라이버"}
+  ]
+}

@@ -1,0 +1,864 @@
+{
+ "router": "liner-claude-router",
+ "releases": {
+  "langchain": [
+   "1.5.2",
+   "2026-11-18T22:30:28"
+  ],
+  "langchain-core": [
+   "1.8.4",
+   "2026-11-19T22:35:41"
+  ]
+ },
+ "responses": {
+  "60ebc46e843a6ae0ab41f15ac83aa5fdc2be1deb3b4d59af34fe63a62d6466aa": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_019Wo3Q2LVQXsQhBW7bwhHRY",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"langchain v1 migration langchain.prompts moved langchain_core.prompts ChatPromptTemplate\", \"site\": \"docs.langchain.com\"}"
+      }
+     },
+     {
+      "id": "toolu_01JR9iu4XLY9VNYhSciqPJYx",
+      "type": "function",
+      "function": {
+       "name": "run_example",
+       "arguments": "{\"code\": \"from langchain_core.prompts import ChatPromptTemplate\\nfrom langchain_core.output_parsers import StrOutputParser\\nfrom vivo_demo import make_chat_model\\n\\n# 1. \\uc9c8\\ubb38\\uc774 \\ub4e4\\uc5b4\\uac08 \\uc790\\ub9ac\\uac00 \\uc788\\ub294 \\ud504\\ub86c\\ud504\\ud2b8\\nprompt = ChatPromptTemplate.from_template(\\n    \\\"\\ub2f9\\uc2e0\\uc740 \\ub0a0\\uc528\\ub97c \\uc27d\\uac8c \\uc124\\uba85\\ud558\\ub294 \\ub3c4\\uc6b0\\ubbf8\\uc608\\uc694. \\ub2e4\\uc74c \\uc9c8\\ubb38\\uc5d0 \\uc9e7\\uac8c \\ub2f5\\ud574 \\uc8fc\\uc138\\uc694. \\uc9c8\\ubb38: {question}\\\"\\n)\\n\\n# 2. \\ud14c\\uc2a4\\ud2b8\\uc6a9 \\ucc44\\ud305 \\ubaa8\\ub378\\uacfc \\ubb38\\uc790\\uc5f4 \\ucd9c\\ub825 \\ud30c\\uc11c\\nllm = make_chat_model()\\noutput_parser = StrOutputParser()\\n\\n# 3. \\ud504\\ub86c\\ud504\\ud2b8 \\u2192 \\ubaa8\\ub378 \\u2192 \\ucd9c\\ub825 \\ud30c\\uc11c\\ub97c \\ud558\\ub098\\uc758 \\uccb4\\uc778\\uc73c\\ub85c\\nchain = prompt | llm | output_parser\\n\\n\\ndef ask(question):\\n    return chain.invoke({\\\"question\\\": question})\\n\\n\\nprint(ask(\\\"\\uc11c\\uc6b8 \\ub0a0\\uc528\\ub294?\\\"))\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 4.32,
+    "prompt_tokens": 2405,
+    "completion_tokens": 486,
+    "cost_usd": 0.01934
+   }
+  },
+  "fe0f71d97832bc806963fe7012bf63d5aaaf75fcc4c37ac4518217c68576b97e": {
+   "value": [
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "description": "This guide outlines the major changes between LangChain v1 and previous versions. The hub module (for managing prompts programmatically) has been fixed from ...",
+     "date": null
+    },
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "description": "This migration guide outlines the major changes in LangChain v1. In v1, the react agent prebuilt is now in the langchain package. ChatPromptTemplate. ...",
+     "date": null
+    },
+    {
+     "title": "Tools - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/langchain/tools",
+     "description": "For agent-level migrations (for example create_react_agent and custom state), see the LangChain v1 migration guide.",
+     "date": null
+    },
+    {
+     "title": "Memory overview - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/concepts/memory",
+     "description": "Chat models accept context using messages, which include developer provided instructions (a system message) and user inputs (human messages). In chat ...",
+     "date": null
+    },
+    {
+     "title": "ChatGoogleGenerativeAI integration - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai",
+     "description": "To access Google AI models you'll need to create a Google Account, get a Google AI API key, and install the langchain-google-genai integration package.",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "query": "site:docs.langchain.com langchain v1 migration langchain.prompts moved langchain_core.prompts ChatPromptTemplate",
+    "seconds": 2.43,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/python/langchain/tools",
+     "https://docs.langchain.com/oss/python/concepts/memory",
+     "https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "0d1abda4280b91f8401b8d3b22ec6f85b218ad65ae692250b5e125c635207264": {
+   "value": {
+    "role": "assistant",
+    "content": "Need better citation.",
+    "tool_calls": [
+     {
+      "id": "toolu_01SNJFJhnGre8x4tyCTRQvQu",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"langchain_core.prompts ChatPromptTemplate from_template reference\", \"site\": \"reference.langchain.com\"}"
+      }
+     },
+     {
+      "id": "toolu_01UMfL2MJkP8yKiJggdE86PE",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"LangChain v1 simplified namespace legacy functionality moved to langchain-classic\", \"site\": \"docs.langchain.com\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 2.31,
+    "prompt_tokens": 3654,
+    "completion_tokens": 206,
+    "cost_usd": 0.01874
+   }
+  },
+  "b5fd48da4b120582e76e365a74ad348d04aa48a17acc217a294f8a5018fee830": {
+   "value": [
+    {
+     "title": "ChatPromptTemplate | langchain_core",
+     "url": "https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate",
+     "description": "Use to create flexible templated prompts for chat models. Creates a chat template consisting of a single message assumed to be from the human.",
+     "date": null
+    },
+    {
+     "title": "from_template | langchain_core",
+     "url": "https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate/from_template",
+     "description": "Create a chat prompt template from a template string. Creates a chat template consisting of a single message assumed to be from the human.",
+     "date": null
+    },
+    {
+     "title": "prompts | langchain_core",
+     "url": "https://reference.langchain.com/python/langchain-core/prompts",
+     "description": "Prompt template for chat models. Use to create flexible templated prompts for chat models. from langchain_core.prompts import ChatPromptTemplate template ...",
+     "date": null
+    },
+    {
+     "title": "langchain_core | LangChain Reference",
+     "url": "https://reference.langchain.com/python/langchain-core",
+     "description": "Class ChatPromptTemplate Prompt template for chat models. Use to create flexible templated prompts for chat models.",
+     "date": null
+    },
+    {
+     "title": "PromptTemplate | langchain_core",
+     "url": "https://reference.langchain.com/python/langchain-core/prompts/prompt/PromptTemplate",
+     "description": "A prompt template consists of a string template. It accepts a set of parameters from the user that can be used to generate a prompt for a language model.",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "query": "site:reference.langchain.com langchain_core.prompts ChatPromptTemplate from_template reference",
+    "seconds": 2.26,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate",
+     "https://reference.langchain.com/python/langchain-core/prompts/chat/ChatPromptTemplate/from_template",
+     "https://reference.langchain.com/python/langchain-core/prompts",
+     "https://reference.langchain.com/python/langchain-core",
+     "https://reference.langchain.com/python/langchain-core/prompts/prompt/PromptTemplate"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "2b2949d1cf58fa4e191992f761cc969bf4ab380aa0a3ddaeccb3b79cfe3f6722": {
+   "value": [
+    {
+     "title": "What's new in LangChain v1",
+     "url": "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "description": "The langchain namespace has been streamlined to focus on essential building blocks for agents, with legacy functionality moved to langchain-classic . To upgrade ...",
+     "date": null
+    },
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "description": "Legacy code moved to langchain-classic. Existing functionality outside the focus of standard interfaces and agents has been moved to the langchain-classic ...",
+     "date": null
+    },
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "description": "Simplified package. The langchain package namespace is streamlined to focus on agent building blocks. Legacy functionality has moved to @langchain/classic .",
+     "date": null
+    },
+    {
+     "title": "What's new in LangChain v1",
+     "url": "https://docs.langchain.com/oss/javascript/releases/langchain-v1",
+     "description": "The langchain package has been streamlined to focus on essential building blocks for agents, with legacy functionality moved to @langchain/classic . To upgrade,.",
+     "date": null
+    },
+    {
+     "title": "Delete an item.",
+     "url": "https://docs.langchain.com/langsmith/agent-server-api/store/delete-an-item",
+     "description": "Search or list items within a namespace prefix. POST. List namespaces with optional match conditions. A2A.",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "query": "site:docs.langchain.com LangChain v1 simplified namespace legacy functionality moved to langchain-classic",
+    "seconds": 2.14,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/javascript/releases/langchain-v1",
+     "https://docs.langchain.com/langsmith/agent-server-api/store/delete-an-item"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "8e08e7b17e0310d91d459fa1892020eb7101a3569927f211c4d94c2a4f1b614a": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01P6BAZKP8Q24GkfdvgtwsGr",
+      "type": "function",
+      "function": {
+       "name": "submit_revision",
+       "arguments": "{\"verdict\": \"RED\", \"citations\": [{\"evidence_id\": \"s11\", \"quote\": \"The langchain namespace has been streamlined to focus on essential building blocks for agents, with legacy functionality moved to langchain-classic\"}, {\"evidence_id\": \"s8\", \"quote\": \"from langchain_core.prompts import ChatPromptTemplate\"}, {\"evidence_id\": \"s7\", \"quote\": \"Create a chat prompt template from a template string.\"}], \"reason_ko\": \"LangChain v1(\\uc124\\uce58 \\ubc84\\uc804 langchain 1.5.0)\\uc5d0\\uc11c\\ub294 langchain \\ub124\\uc784\\uc2a4\\ud398\\uc774\\uc2a4\\uac00 \\ucd95\\uc18c\\ub418\\uc5b4 `langchain.prompts` \\ubaa8\\ub4c8\\uc774 \\uc5c6\\uc5b4\\uc84c\\uae30 \\ub54c\\ubb38\\uc5d0 \\uc6d0\\ub798 \\ucf54\\ub4dc\\ub294 ModuleNotFoundError\\ub85c \\uc2e4\\ud328\\ud574\\uc694. \\uacf5\\uc2dd \\ub808\\ud37c\\ub7f0\\uc2a4\\uc5d0 \\ub530\\ub77c `ChatPromptTemplate`\\uc744 `langchain_core.prompts`\\uc5d0\\uc11c \\uac00\\uc838\\uc624\\ub3c4\\ub85d \\uace0\\ucce4\\uace0, \\uace0\\uce5c \\ucf54\\ub4dc\\ub294 \\ub300\\uc0c1 \\ud658\\uacbd\\uc5d0\\uc11c \\uc2e4\\ud589\\ub3fc\\uc694.\", \"explanation_ko\": \"`ChatPromptTemplate`\\uc740 `langchain_core.prompts`\\uc5d0\\uc11c \\uac00\\uc838\\uc640\\uc694. LangChain v1\\ubd80\\ud130 `langchain` \\ud328\\ud0a4\\uc9c0\\ub294 \\uc5d0\\uc774\\uc804\\ud2b8\\uc5d0 \\uaf2d \\ud544\\uc694\\ud55c \\uae30\\ub2a5 \\uc704\\uc8fc\\ub85c \\uc815\\ub9ac\\ub418\\uc5b4 `langchain.prompts` \\uacbd\\ub85c\\ub85c\\ub294 \\ub354 \\uc774\\uc0c1 \\uac00\\uc838\\uc62c \\uc218 \\uc5c6\\uc5b4\\uc694. `ChatPromptTemplate.from_template()`\\uc740 \\ud15c\\ud50c\\ub9bf \\ubb38\\uc790\\uc5f4 \\ud558\\ub098\\ub85c \\uc0ac\\ub78c(human) \\uba54\\uc2dc\\uc9c0 \\ud558\\ub098\\uc9dc\\ub9ac \\ucc44\\ud305 \\ud504\\ub86c\\ud504\\ud2b8\\ub97c \\ub9cc\\ub4e4\\uace0, \\uadf8 \\uc548\\uc758 `{question}` \\uc790\\ub9ac\\uc5d0 \\uc9c8\\ubb38\\uc774 \\ub4e4\\uc5b4\\uac00\\uc694. \\ud504\\ub86c\\ud504\\ud2b8, \\ubaa8\\ub378, \\ucd9c\\ub825 \\ud30c\\uc11c\\ub97c `|`\\ub85c \\uc774\\uc5b4 \\uccb4\\uc778\\uc744 \\ub9cc\\ub4e4\\uace0 `invoke()`\\uc5d0 `{\\\"question\\\": \\uc9c8\\ubb38}` \\ub515\\uc154\\ub108\\ub9ac\\ub97c \\ub118\\uae30\\uba74, \\ubaa8\\ub378\\uc774 \\ub3cc\\ub824\\uc900 \\uba54\\uc2dc\\uc9c0\\ub97c `StrOutputParser`\\uac00 \\ubb38\\uc790\\uc5f4\\ub85c \\ubc14\\uafd4 \\uc918\\uc694. \\uadf8\\ub798\\uc11c `ask()`\\ub294 \\uc774 \\ubb38\\uc790\\uc5f4\\uc744 \\uadf8\\ub300\\ub85c \\ubc18\\ud658\\ud574\\uc694.\", \"code\": \"from langchain_core.prompts import ChatPromptTemplate\\nfrom langchain_core.output_parsers import StrOutputParser\\nfrom vivo_demo import make_chat_model\\n\\n# 1. \\uc9c8\\ubb38\\uc774 \\ub4e4\\uc5b4\\uac08 \\uc790\\ub9ac\\uac00 \\uc788\\ub294 \\ud504\\ub86c\\ud504\\ud2b8\\nprompt = ChatPromptTemplate.from_template(\\n    \\\"\\ub2f9\\uc2e0\\uc740 \\ub0a0\\uc528\\ub97c \\uc27d\\uac8c \\uc124\\uba85\\ud558\\ub294 \\ub3c4\\uc6b0\\ubbf8\\uc608\\uc694. \\ub2e4\\uc74c \\uc9c8\\ubb38\\uc5d0 \\uc9e7\\uac8c \\ub2f5\\ud574 \\uc8fc\\uc138\\uc694. \\uc9c8\\ubb38: {question}\\\"\\n)\\n\\n# 2. \\ud14c\\uc2a4\\ud2b8\\uc6a9 \\ucc44\\ud305 \\ubaa8\\ub378\\uacfc \\ubb38\\uc790\\uc5f4 \\ucd9c\\ub825 \\ud30c\\uc11c\\nllm = make_chat_model()\\noutput_parser = StrOutputParser()\\n\\n# 3. \\ud504\\ub86c\\ud504\\ud2b8 \\u2192 \\ubaa8\\ub378 \\u2192 \\ucd9c\\ub825 \\ud30c\\uc11c\\ub97c \\ud558\\ub098\\uc758 \\uccb4\\uc778\\uc73c\\ub85c\\nchain = prompt | llm | output_parser\\n\\n\\ndef ask(question):\\n    return chain.invoke({\\\"question\\\": question})\\n\\n\\nprint(ask(\\\"\\uc11c\\uc6b8 \\ub0a0\\uc528\\ub294?\\\"))\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 8.73,
+    "prompt_tokens": 5069,
+    "completion_tokens": 1083,
+    "cost_usd": 0.04194
+   }
+  },
+  "3201300f5cb60e9f811e835df3caf20f147460be7257d9caf51f9998215a5bdd": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01LUtbVQgyF3LMp642WU9AeZ",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"langchain v1 create_agent tools invoke messages\", \"site\": \"docs.langchain.com\"}"
+      }
+     },
+     {
+      "id": "toolu_01AQ7AbKzYoHzgiofcFUjqQY",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"langchain v1 migration guide create_react_agent AgentExecutor langchain-classic\", \"site\": \"docs.langchain.com\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 2.63,
+    "prompt_tokens": 2798,
+    "completion_tokens": 222,
+    "cost_usd": 0.01563
+   }
+  },
+  "4ee179576785c990a49321c6024c87d1e8f9eb496c3a91104fb593c56203c56e": {
+   "value": [
+    {
+     "title": "What's new in LangChain v1",
+     "url": "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "description": "create_agent is the standard way to build agents in LangChain 1.0. It provides a simpler interface than langgraph.prebuilt.create_react_agent while offering ...",
+     "date": null
+    },
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "description": "The tools argument to create_agent accepts a list of: LangChain BaseTool instances @tool ) Callable objects (functions) with proper type hints",
+     "date": null
+    },
+    {
+     "title": "Agents - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/langchain/agents",
+     "description": "You can invoke an agent with a message. All agents include a sequence of messages in their state; to invoke the agent, pass a new message along with a thread_ ...",
+     "date": null
+    },
+    {
+     "title": "LangChain overview",
+     "url": "https://docs.langchain.com/oss/python/langchain/overview",
+     "description": "LangChain provides create_agent: a minimal, highly configurable agent harness. Compose exactly the agent your use case needs from model, tools, prompt, ...",
+     "date": null
+    },
+    {
+     "title": "Tools - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/langchain/tools",
+     "description": "In LangChain, tools are used by agents (for example via create_agent ) and tool error handling is configured through middleware. For LangGraph workflows, tool ...",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "query": "site:docs.langchain.com langchain v1 create_agent tools invoke messages",
+    "seconds": 2.59,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/python/langchain/agents",
+     "https://docs.langchain.com/oss/python/langchain/overview",
+     "https://docs.langchain.com/oss/python/langchain/tools"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "7a08b693e6822aed0c89597a06fa6c7d8c66a9ec2bb659edf3059e713d2d6fb8": {
+   "value": [
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "description": "This guide outlines the major changes between LangChain v1 and previous versions. Migrate to create_agent Prior to v1.0, we recommended using langgraph. ...",
+     "date": null
+    },
+    {
+     "title": "LangGraph v1 migration guide",
+     "url": "https://docs.langchain.com/oss/python/migrate/langgraph-v1",
+     "description": "This guide outlines changes in LangGraph v1 and how to migrate from previous versions. The main change is the deprecation of create_react_agent in favor of ...",
+     "date": null
+    },
+    {
+     "title": "What's new in LangChain v1",
+     "url": "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "description": "create_agent is the standard way to build agents in LangChain 1.0. It provides a simpler interface langgraph.prebuilt.create_react_agent. How to migrate to ...",
+     "date": null
+    },
+    {
+     "title": "Agents - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/langchain/agents",
+     "description": "create_agent is a highly configurable harness. At its simplest, you can create one with: Use create_agent when you need to configure a smaller harness yourself.",
+     "date": null
+    },
+    {
+     "title": "Agents - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/javascript/langchain/agents",
+     "description": "Build a LangChain agent: a model calling tools in a loop until a task is complete, shaped by a harness of prompt, tools, and middleware.",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "query": "site:docs.langchain.com langchain v1 migration guide create_react_agent AgentExecutor langchain-classic",
+    "seconds": 2.77,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/python/migrate/langgraph-v1",
+     "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "https://docs.langchain.com/oss/python/langchain/agents",
+     "https://docs.langchain.com/oss/javascript/langchain/agents"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "5cd09cdbd11ab2e297a998b88b0fc59185f81c185b1b927925a68cd578b0fe74": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01RX4uhdq6m81GY3nRagw572",
+      "type": "function",
+      "function": {
+       "name": "run_example",
+       "arguments": "{\"code\": \"from langchain.agents import create_agent\\nfrom langchain_core.tools import Tool\\nfrom vivo_demo import make_model, weather\\n\\n# 1. \\uc2dc\\uc2a4\\ud15c \\ud504\\ub86c\\ud504\\ud2b8: ReAct \\ud615\\uc2dd \\ubb38\\uc790\\uc5f4 \\ub300\\uc2e0 \\uc5d0\\uc774\\uc804\\ud2b8\\uc758 \\uc5ed\\ud560\\ub9cc \\uc54c\\ub824 \\uc918\\uc694\\nSYSTEM_PROMPT = \\\"\\ub2f9\\uc2e0\\uc740 \\ub0a0\\uc528 \\uc9c8\\ubb38\\uc5d0 \\ub2f5\\ud558\\ub294 \\ub3c4\\uc6b0\\ubbf8\\uc608\\uc694. \\ud544\\uc694\\ud558\\uba74 weather \\ub3c4\\uad6c\\ub97c \\uc368\\uc11c \\ub2f5\\ud558\\uc138\\uc694.\\\"\\n\\n\\ndef answer_city(city):\\n    # 2. \\ud14c\\uc2a4\\ud2b8\\uc6a9 \\ubaa8\\ub378\\uacfc \\ub0a0\\uc528 \\ub3c4\\uad6c\\n    llm = make_model(city)\\n    weather_tool = Tool(name=\\\"weather\\\", func=weather.run,\\n                        description=\\\"\\ub3c4\\uc2dc \\uc774\\ub984\\uc744 \\ubc1b\\uc544 \\ud604\\uc7ac \\ub0a0\\uc528\\ub97c \\uc54c\\ub824 \\uc8fc\\ub294 \\ub3c4\\uad6c\\\")\\n    tools = [weather_tool]\\n\\n    # 3. \\uc5d0\\uc774\\uc804\\ud2b8 \\ub9cc\\ub4e4\\uae30 (\\uc2e4\\ud589\\uae30\\uac00 \\ub530\\ub85c \\ud544\\uc694 \\uc5c6\\uc5b4\\uc694)\\n    agent = create_agent(llm, tools=tools, system_prompt=SYSTEM_PROMPT)\\n\\n    # 4. \\uc2e4\\ud589\\ud558\\uace0 \\ucd5c\\uc885 \\ub2f5 \\uaebc\\ub0b4\\uae30\\n    result = agent.invoke({\\\"messages\\\": [{\\\"role\\\": \\\"user\\\", \\\"content\\\": city}]})\\n    return result[\\\"messages\\\"][-1].content\\n\\n\\nprint(answer_city(\\\"Seoul\\\"))\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 4.69,
+    "prompt_tokens": 4218,
+    "completion_tokens": 508,
+    "cost_usd": 0.02703
+   }
+  },
+  "2eaa4fa0ed2172b50fed5e03fb552c13c00dec52ace3274edf169c14bbec92d6": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01P48PiCFKodDnd7gWAvipav",
+      "type": "function",
+      "function": {
+       "name": "run_example",
+       "arguments": "{\"code\": \"from langchain.agents import create_agent\\nfrom vivo_demo import make_model, weather\\n\\nSYSTEM_PROMPT = \\\"\\ub2f9\\uc2e0\\uc740 \\ub0a0\\uc528 \\uc9c8\\ubb38\\uc5d0 \\ub2f5\\ud558\\ub294 \\ub3c4\\uc6b0\\ubbf8\\uc608\\uc694. \\ud544\\uc694\\ud558\\uba74 weather \\ub3c4\\uad6c\\ub97c \\uc368\\uc11c \\ub2f5\\ud558\\uc138\\uc694.\\\"\\n\\n\\ndef answer_city(city):\\n    llm = make_model(city)\\n    tools = [weather]\\n    agent = create_agent(llm, tools=tools, system_prompt=SYSTEM_PROMPT)\\n    result = agent.invoke({\\\"messages\\\": [{\\\"role\\\": \\\"user\\\", \\\"content\\\": city}]})\\n    return result[\\\"messages\\\"][-1].content\\n\\n\\nprint(answer_city(\\\"Seoul\\\"))\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 3.13,
+    "prompt_tokens": 4723,
+    "completion_tokens": 319,
+    "cost_usd": 0.02527
+   }
+  },
+  "0b99c39993ca150c79336b67856160d302f2e22b6678f204b61506e3ba1a1de0": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01RGYyNbF5ake7KXPT6fV3cd",
+      "type": "function",
+      "function": {
+       "name": "submit_revision",
+       "arguments": "{\"verdict\": \"RED\", \"citations\": [{\"evidence_id\": \"s1\", \"quote\": \"create_agent is the standard way to build agents in LangChain 1.0.\"}, {\"evidence_id\": \"s2\", \"quote\": \"The tools argument to create_agent accepts a list of: LangChain BaseTool instances\"}, {\"evidence_id\": \"s3\", \"quote\": \"All agents include a sequence of messages in their state\"}], \"reason_ko\": \"LangChain 1.x\\uc5d0\\uc11c\\ub294 `langchain.agents`\\uc5d0\\uc11c `Tool`\\uc744 \\uac00\\uc838\\uc62c \\uc218 \\uc5c6\\uc5b4\\uc11c \\uc6d0\\ub798 \\uc608\\uc81c\\uac00 ImportError\\ub85c \\uc2e4\\ud328\\ud574\\uc694. \\uacf5\\uc2dd \\ubb38\\uc11c\\uc5d0 \\ub530\\ub974\\uba74 1.0\\uc5d0\\uc11c\\ub294 `create_agent`\\ub85c \\uc5d0\\uc774\\uc804\\ud2b8\\ub97c \\ub9cc\\ub4dc\\ub294 \\uac83\\uc774 \\ud45c\\uc900 \\ubc29\\uc2dd\\uc774\\uc5d0\\uc694. \\uadf8\\ub798\\uc11c `create_react_agent`\\uc640 `AgentExecutor` \\uc870\\ud569\\uc744 `create_agent`\\ub85c \\ubc14\\uafb8\\uace0, \\uacb0\\uacfc\\ub294 \\uba54\\uc2dc\\uc9c0 \\ubaa9\\ub85d\\uc5d0\\uc11c \\uaebc\\ub0b4\\ub3c4\\ub85d \\uace0\\ucce4\\uc5b4\\uc694.\", \"explanation_ko\": \"\\uc774 \\uc608\\uc81c\\ub294 LangChain 1.x \\ubc29\\uc2dd\\uc774\\uc5d0\\uc694. 0.3\\uc758 `create_react_agent()`\\uc640 `AgentExecutor` \\uc870\\ud569 \\ub300\\uc2e0 `create_agent()` \\ud558\\ub098\\ub85c \\uc5d0\\uc774\\uc804\\ud2b8\\ub97c \\ub9cc\\ub4e4\\uc5b4\\uc694. `tools`\\uc5d0\\ub294 `BaseTool` \\uc778\\uc2a4\\ud134\\uc2a4\\ub97c \\uadf8\\ub300\\ub85c \\ub118\\uae38 \\uc218 \\uc788\\uc5b4\\uc11c `weather` \\ub3c4\\uad6c\\ub97c `Tool`\\ub85c \\ub2e4\\uc2dc \\uac10\\uc2f8\\uc9c0 \\uc54a\\uace0 \\ub9ac\\uc2a4\\ud2b8\\uc5d0 \\ubc14\\ub85c \\ub123\\uc5b4\\uc694. ReAct \\ud615\\uc2dd \\ud504\\ub86c\\ud504\\ud2b8 \\ud15c\\ud50c\\ub9bf\\uc740 \\ub354 \\uc774\\uc0c1 \\ud544\\uc694 \\uc5c6\\uace0, \\uc5d0\\uc774\\uc804\\ud2b8\\uc758 \\uc5ed\\ud560\\ub9cc `system_prompt` \\ubb38\\uc790\\uc5f4\\ub85c \\uc54c\\ub824 \\uc918\\uc694. \\uc785\\ub825\\ub3c4 \\ub2ec\\ub77c\\uc84c\\uc5b4\\uc694. `invoke()`\\uc5d0\\ub294 `{\\\"messages\\\": [{\\\"role\\\": \\\"user\\\", \\\"content\\\": city}]}`\\ucc98\\ub7fc \\uba54\\uc2dc\\uc9c0 \\ubaa9\\ub85d\\uc744 \\ub118\\uaca8\\uc694. \\ubc18\\ud658\\uac12\\uc740 `messages` \\ubaa9\\ub85d\\uc744 \\ub2f4\\uc740 \\uc0c1\\ud0dc \\ub515\\uc154\\ub108\\ub9ac\\uc774\\uace0, \\ucd5c\\uc885 \\ub2f5\\uc740 \\uc774 \\ubaa9\\ub85d\\uc758 \\ub9c8\\uc9c0\\ub9c9 AI \\uba54\\uc2dc\\uc9c0\\uc778 `result[\\\"messages\\\"][-1].content`\\uc5d0\\uc11c \\uaebc\\ub0b4\\uc694.\", \"code\": \"from langchain.agents import create_agent\\nfrom vivo_demo import make_model, weather\\n\\n# 1. \\uc2dc\\uc2a4\\ud15c \\ud504\\ub86c\\ud504\\ud2b8: ReAct \\ud615\\uc2dd \\ud15c\\ud50c\\ub9bf \\ub300\\uc2e0 \\uc5d0\\uc774\\uc804\\ud2b8\\uc758 \\uc5ed\\ud560\\ub9cc \\uc54c\\ub824 \\uc918\\uc694\\nSYSTEM_PROMPT = \\\"\\ub2f9\\uc2e0\\uc740 \\ub0a0\\uc528 \\uc9c8\\ubb38\\uc5d0 \\ub2f5\\ud558\\ub294 \\ub3c4\\uc6b0\\ubbf8\\uc608\\uc694. \\ud544\\uc694\\ud558\\uba74 weather \\ub3c4\\uad6c\\ub97c \\uc368\\uc11c \\ub2f5\\ud558\\uc138\\uc694.\\\"\\n\\n\\ndef answer_city(city):\\n    # 2. \\ud14c\\uc2a4\\ud2b8\\uc6a9 \\ubaa8\\ub378\\uacfc \\ub0a0\\uc528 \\ub3c4\\uad6c\\n    llm = make_model(city)\\n    tools = [weather]\\n\\n    # 3. \\uc5d0\\uc774\\uc804\\ud2b8 \\ub9cc\\ub4e4\\uae30 (\\ubcc4\\ub3c4\\uc758 \\uc2e4\\ud589\\uae30\\uac00 \\ud544\\uc694 \\uc5c6\\uc5b4\\uc694)\\n    agent = create_agent(llm, tools=tools, system_prompt=SYSTEM_PROMPT)\\n\\n    # 4. \\uc2e4\\ud589\\ud558\\uace0 \\ucd5c\\uc885 \\ub2f5 \\uaebc\\ub0b4\\uae30\\n    result = agent.invoke({\\\"messages\\\": [{\\\"role\\\": \\\"user\\\", \\\"content\\\": city}]})\\n    return result[\\\"messages\\\"][-1].content\\n\\n\\nprint(answer_city(\\\"Seoul\\\"))\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 10.03,
+    "prompt_tokens": 5073,
+    "completion_tokens": 1228,
+    "cost_usd": 0.04485
+   }
+  },
+  "8d560a4fa671dbfb08cd475017084181a51073a23448bccedc576809fb3e540a": {
+   "value": [
+    [
+     {
+      "id": "langchain-version-claim",
+      "lines": [
+       5,
+       5
+      ],
+      "kind": "sentence",
+      "subject": "예제 실행을 확인한 LangChain 버전(1.5.0)이 목표 환경과 일치하는지",
+      "packages": [
+       "langchain"
+      ],
+      "symbols": [],
+      "query": "langchain 1.5.0 release notes changelog",
+      "official_site": "docs.langchain.com"
+     },
+     {
+      "id": "langchain-core-version-claim",
+      "lines": [
+       5,
+       5
+      ],
+      "kind": "sentence",
+      "subject": "예제 실행을 확인한 langchain-core 버전(1.8.1)이 목표 환경과 일치하는지",
+      "packages": [
+       "langchain-core"
+      ],
+      "symbols": [],
+      "query": "langchain-core 1.8.1 release notes changelog",
+      "official_site": "github.com/langchain-ai/langchain"
+     },
+     {
+      "id": "pip-install-langchain",
+      "lines": [
+       10,
+       10
+      ],
+      "kind": "pip",
+      "subject": "langchain==1.5.0, langchain-core==1.8.1 고정 설치 명령이 유효하고 서로 호환되는지",
+      "packages": [
+       "langchain",
+       "langchain-core"
+      ],
+      "symbols": [],
+      "query": "langchain 1.5.0 langchain-core 1.8.1 pip install dependency compatibility",
+      "official_site": "docs.langchain.com"
+     },
+     {
+      "id": "langchain-prompts-chatprompttemplate",
+      "lines": [
+       13,
+       13
+      ],
+      "kind": "sentence",
+      "subject": "langchain.prompts 모듈에서 ChatPromptTemplate을 가져오는 경로가 LangChain 1.x에서도 유효한지",
+      "packages": [
+       "langchain",
+       "langchain-core"
+      ],
+      "symbols": [
+       "langchain.prompts:ChatPromptTemplate",
+       "langchain_core.prompts:ChatPromptTemplate"
+      ],
+      "query": "langchain 1.0 langchain.prompts ChatPromptTemplate import removed migration langchain_core.prompts",
+      "official_site": "docs.langchain.com"
+     },
+     {
+      "id": "create-react-agent",
+      "lines": [
+       15,
+       15
+      ],
+      "kind": "sentence",
+      "subject": "create_react_agent()로 ReAct 에이전트를 만드는 방식이 LangChain 1.x에서도 권장·지원되는지",
+      "packages": [
+       "langchain",
+       "langgraph"
+      ],
+      "symbols": [
+       "langchain.agents:create_react_agent",
+       "langgraph.prebuilt:create_react_agent",
+       "langchain.agents:create_agent"
+      ],
+      "query": "langchain 1.0 create_react_agent deprecated create_agent migration",
+      "official_site": "docs.langchain.com"
+     },
+     {
+      "id": "agent-executor",
+      "lines": [
+       15,
+       15
+      ],
+      "kind": "sentence",
+      "subject": "AgentExecutor로 에이전트를 실행하는 방식이 LangChain 1.x에서도 지원되는지(langchain-classic으로 이동 여부)",
+      "packages": [
+       "langchain",
+       "langchain-classic"
+      ],
+      "symbols": [
+       "langchain.agents:AgentExecutor",
+       "langchain_classic.agents:AgentExecutor"
+      ],
+      "query": "langchain 1.0 AgentExecutor removed langchain-classic migration",
+      "official_site": "docs.langchain.com"
+     },
+     {
+      "id": "make-model-test-model",
+      "lines": [
+       17,
+       17
+      ],
+      "kind": "sentence",
+      "subject": "make_model() 테스트용 모델로 API 키 없이 예제를 실행할 수 있는지",
+      "packages": [],
+      "symbols": [
+       "vivo_demo:make_model"
+      ],
+      "query": "vivo-books-sample-book vivo_demo make_model fake chat model without API key",
+      "official_site": "github.com/makepluscode/vivo-books-sample-book"
+     },
+     {
+      "id": "sample-repo-examples-path",
+      "lines": [
+       19,
+       19
+      ],
+      "kind": "sentence",
+      "subject": "예제 저장소 주소와 examples/ch04_prompt_template.py 같은 장별 파일 경로가 실제와 맞는지",
+      "packages": [],
+      "symbols": [],
+      "query": "makepluscode vivo-books-sample-book examples ch04_prompt_template.py",
+      "official_site": "github.com/makepluscode/vivo-books-sample-book"
+     },
+     {
+      "id": "sample-repo-vivo-demo",
+      "lines": [
+       19,
+       19
+      ],
+      "kind": "sentence",
+      "subject": "테스트용 모델을 examples/ 폴더의 vivo_demo.py가 제공하는지",
+      "packages": [],
+      "symbols": [
+       "vivo_demo:make_model"
+      ],
+      "query": "makepluscode vivo-books-sample-book examples vivo_demo.py",
+      "official_site": "github.com/makepluscode/vivo-books-sample-book"
+     }
+    ],
+    "```json\n[\n  {\n    \"id\": \"langchain-version-claim\",\n    \"lines\": [5, 5],\n    \"kind\": \"sentence\",\n    \"subject\": \"예제 실행을 확인한 LangChain 버전(1.5.0)이 목표 환경과 일치하는지\",\n    \"packages\": [\"langchain\"],\n    \"symbols\": [],\n    \"query\": \"langchain 1.5.0 release notes changelog\",\n    \"official_site\": \"docs.langchain.com\"\n  },\n  {\n    \"id\": \"langchain-core-version-claim\",\n    \"lines\": [5, 5],\n    \"kind\": \"sentence\",\n    \"subject\": \"예제 실행을 확인한 langchain-core 버전(1.8.1)이 목표 환경과 일치하는지\",\n    \"packages\": [\"langchain-core\"],\n    \"symbols\": [],\n    \"query\": \"langchain-core 1.8.1 release notes changelog\",\n    \"official_site\": \"github.com/langchain-ai/langchain\"\n  },\n  {\n    \"id\": \"pip-install-langchain\",\n    \"lines\": [10, 10],\n    \"kind\": \"pip\",\n    \"subject\": \"langchain==1.5.0, langchain-core==1.8.1 고정 설치 명령이 유효하고 서로 호환되는지\",\n    \"packages\": [\"langchain\", \"langchain-core\"],\n    \"symbols\": [],\n    \"query\": \"langchain 1.5.0 langchain-core 1.8.1 pip install dependency compatibility\",\n    \"official_site\": \"docs.langchain.com\"\n  },\n  {\n    \"id\": \"langchain-prompts-chatprompttemplate\",\n    \"lines\": [13, 13],\n    \"kind\": \"sentence\",\n    \"subject\": \"langchain.prompts 모듈에서 ChatPromptTemplate을 가져오는 경로가 LangChain 1.x에서도 유효한지\",\n    \"packages\": [\"langchain\", \"langchain-core\"],\n    \"symbols\": [\"langchain.prompts:ChatPromptTemplate\", \"langchain_core.prompts:ChatPromptTemplate\"],\n    \"query\": \"langchain 1.0 langchain.prompts ChatPromptTemplate import removed migration langchain_core.prompts\",\n    \"official_site\": \"docs.langchain.com\"\n  },\n  {\n    \"id\": \"create-react-agent\",\n    \"lines\": [15, 15],\n    \"kind\": \"sentence\",\n    \"subject\": \"create_react_agent()로 ReAct 에이전트를 만드는 방식이 LangChain 1.x에서도 권장·지원되는지\",\n    \"packages\": [\"langchain\", \"langgraph\"],\n    \"symbols\": [\"langchain.agents:create_react_agent\", \"langgraph.prebuilt:create_react_agent\", \"langchain.agents:create_agent\"],\n    \"query\": \"langchain 1.0 create_react_agent deprecated create_agent migration\",\n    \"official_site\": \"docs.langchain.com\"\n  },\n  {\n    \"id\": \"agent-executor\",\n    \"lines\": [15, 15],\n    \"kind\": \"sentence\",\n    \"subject\": \"AgentExecutor로 에이전트를 실행하는 방식이 LangChain 1.x에서도 지원되는지(langchain-classic으로 이동 여부)\",\n    \"packages\": [\"langchain\", \"langchain-classic\"],\n    \"symbols\": [\"langchain.agents:AgentExecutor\", \"langchain_classic.agents:AgentExecutor\"],\n    \"query\": \"langchain 1.0 AgentExecutor removed langchain-classic migration\",\n    \"official_site\": \"docs.langchain.com\"\n  },\n  {\n    \"id\": \"make-model-test-model\",\n    \"lines\": [17, 17],\n    \"kind\": \"sentence\",\n    \"subject\": \"make_model() 테스트용 모델로 API 키 없이 예제를 실행할 수 있는지\",\n    \"packages\": [],\n    \"symbols\": [\"vivo_demo:make_model\"],\n    \"query\": \"vivo-books-sample-book vivo_demo make_model fake chat model without API key\",\n    \"official_site\": \"github.com/makepluscode/vivo-books-sample-book\"\n  },\n  {\n    \"id\": \"sample-repo-examples-path\",\n    \"lines\": [19, 19],\n    \"kind\": \"sentence\",\n    \"subject\": \"예제 저장소 주소와 examples/ch04_prompt_template.py 같은 장별 파일 경로가 실제와 맞는지\",\n    \"packages\": [],\n    \"symbols\": [],\n    \"query\": \"makepluscode vivo-books-sample-book examples ch04_prompt_template.py\",\n    \"official_site\": \"github.com/makepluscode/vivo-books-sample-book\"\n  },\n  {\n    \"id\": \"sample-repo-vivo-demo\",\n    \"lines\": [19, 19],\n    \"kind\": \"sentence\",\n    \"subject\": \"테스트용 모델을 examples/ 폴더의 vivo_demo.py가 제공하는지\",\n    \"packages\": [],\n    \"symbols\": [\"vivo_demo:make_model\"],\n    \"query\": \"makepluscode vivo-books-sample-book examples vivo_demo.py\",\n    \"official_site\": \"github.com/makepluscode/vivo-books-sample-book\"\n  }\n]\n```"
+   ],
+   "details": {
+    "api": "living-extract",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 17.72,
+    "prompt_tokens": 1272,
+    "completion_tokens": 2184
+   }
+  },
+  "24ed42f5ccd8824f5bc8562c3882cf32a8e87fcd86dc041f0b9737b7eb714725": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01VhEvsCwhVTbJBTVEg4PcmN",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"LangChain v1 migration langchain.prompts moved to langchain_core.prompts ChatPromptTemplate\", \"site\": \"docs.langchain.com\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 4.35,
+    "prompt_tokens": 2405,
+    "completion_tokens": 410,
+    "cost_usd": 0.01782
+   }
+  },
+  "03eb3b40bf4c65662c50dbaa02b03111d63ad982a0d8b5dc533597fc6b30a8e6": {
+   "value": [
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "description": "This guide outlines the major changes between LangChain v1 and previous versions. Simplified package. The langchain package namespace has been significantly ...",
+     "date": null
+    },
+    {
+     "title": "LangChain v1 migration guide",
+     "url": "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "description": "ChatPromptTemplate.fromPromptMessages - Use ChatPromptTemplate.fromMessages. Retrievers. BaseRetrieverInterface.getRelevantDocuments - Use .invoke() instead ...",
+     "date": null
+    },
+    {
+     "title": "Tools - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/langchain/tools",
+     "description": "For agent-level migrations (for example create_react_agent and custom state), see the LangChain v1 migration guide. Tool execution. In LangChain, tools are ...",
+     "date": null
+    },
+    {
+     "title": "Memory overview - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/concepts/memory",
+     "description": "Chat models accept context using messages, which include developer provided instructions (a system message) and user inputs (human messages). In chat ...",
+     "date": null
+    },
+    {
+     "title": "ChatGoogleGenerativeAI integration - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai",
+     "description": "To access Google AI models you'll need to create a Google Account, get a Google AI API key, and install the langchain-google-genai integration package.",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-24b503e44dd24601b5936f2440150cde",
+    "query": "site:docs.langchain.com LangChain v1 migration langchain.prompts moved to langchain_core.prompts ChatPromptTemplate",
+    "seconds": 2.46,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/python/langchain/tools",
+     "https://docs.langchain.com/oss/python/concepts/memory",
+     "https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "cb97a359b7cd67c31d66147cfbc38267e31e0f0788c2193b29ffb261ee113cbc": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_019DeievcW6eNprkNctsnYRX",
+      "type": "function",
+      "function": {
+       "name": "submit_verdict",
+       "arguments": "{\"verdict\": \"RED\", \"reason\": \"\\ubaa9\\ud45c \\ud658\\uacbd(langchain 1.5.0)\\uc5d0\\uc11c\\ub294 `langchain.prompts` \\ubaa8\\ub4c8\\uc774 \\uc5c6\\uc5b4\\uc11c import\\ud558\\uba74 ModuleNotFoundError\\uac00 \\ub098\\uc694. \\uacf5\\uc2dd v1 \\ub9c8\\uc774\\uadf8\\ub808\\uc774\\uc158 \\uac00\\uc774\\ub4dc\\uc5d0 \\ub530\\ub974\\uba74 langchain \\ub124\\uc784\\uc2a4\\ud398\\uc774\\uc2a4\\uac00 \\ud06c\\uac8c \\uc904\\uc5b4\\ub4e4\\uc5c8\\uace0, `ChatPromptTemplate`\\uc740 `langchain_core.prompts`\\uc5d0 \\uadf8\\ub300\\ub85c \\uc788\\uc5b4\\uc694. 4\\uc7a5 \\ucf54\\ub4dc\\ub97c \\uc774\\ubbf8 \\uc774 \\uacbd\\ub85c\\ub85c \\uace0\\ucce4\\uc73c\\ub2c8 \\ubcf8\\ubb38 \\ubb38\\uc7a5\\ub3c4 \\uac19\\uc740 \\uacbd\\ub85c\\ub85c \\ub9de\\ucdb0\\uc57c \\ud574\\uc694.\", \"citations\": [{\"evidence_id\": \"s1\", \"quote\": \"The langchain package namespace has been significantly\"}], \"fix\": \"4\\uc7a5\\uc5d0\\uc11c\\ub294 `langchain_core.prompts` \\ubaa8\\ub4c8\\uc758 `ChatPromptTemplate`\\uc73c\\ub85c \\ud504\\ub86c\\ud504\\ud2b8\\ub97c \\ub9cc\\ub4e4\\uc5b4\\uc694.\", \"fix_note\": \"\\uac19\\uc740 \\uac1c\\uc815\\uc758 4\\uc7a5 \\ucf54\\ub4dc \\uc218\\uc815 \\ub0b4\\uc6a9(import \\uacbd\\ub85c\\ub97c langchain_core.prompts\\ub85c \\ubcc0\\uacbd)\\uc5d0 \\ub9de\\ucd98 \\uc218\\uc815\\uc785\\ub2c8\\ub2e4.\", \"confidence\": \"high\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 5.47,
+    "prompt_tokens": 3140,
+    "completion_tokens": 549,
+    "cost_usd": 0.02354
+   }
+  },
+  "4b829ffe9ef270aa19951c275a2a804d77405a476dff5bedb91988ca628cba9e": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_014cWdNY6BCKcV4BPd8DU1m3",
+      "type": "function",
+      "function": {
+       "name": "liner_search",
+       "arguments": "{\"query\": \"LangChain v1 migration create_react_agent deprecated create_agent AgentExecutor langchain-classic\", \"site\": \"docs.langchain.com\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 3.05,
+    "prompt_tokens": 2457,
+    "completion_tokens": 291,
+    "cost_usd": 0.01565
+   }
+  },
+  "505d493018757ed121e306ae82447971b1ae5b6fb2b6441d5c5f3808ad763794": {
+   "value": [
+    {
+     "title": "LangChain v1 migration guide - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "description": "Existing functionality outside the focus of standard interfaces and agents has been moved to the langchain-classic package. See the Simplified namespace section for details on what’s available in the core langchain package and what moved to langchain-classic.",
+     "date": null
+    },
+    {
+     "title": "LangChain v1 migration guide - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "description": "Legacy functionality outside the focus of standard interfaces and agents has been moved to the @langchain/classic package. See the Simplified package section for details on what’s available in the core langchain package and what moved to @langchain/classic.",
+     "date": null
+    },
+    {
+     "title": "Agents - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/javascript/langchain/agents",
+     "description": "For maximum flexibility while using the same Deep Agents harness, use Deep Agents and host agents yourself, or run a custom Agent Server. Use create_agent when you need to configure a smaller harness yourself.",
+     "date": null
+    },
+    {
+     "title": "What's new in LangChain v1 - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "description": "For a complete list of changes, see the migration guide. ... create_agent is the standard way to build agents in LangChain 1.0. It provides a simpler interface than langgraph.prebuilt.create_react_agent while offering greater customization potential by using middleware.",
+     "date": null
+    },
+    {
+     "title": "Migrate from langgraph-supervisor - Docs by LangChain",
+     "url": "https://docs.langchain.com/oss/python/migrate/langgraph-supervisor",
+     "description": "Instead use the subagents pattern: a main agent coordinates specialized workers by calling them as tools. This guide covers how to migrate from create_supervisor to create_agent, including setups that use interrupt and external API callbacks.",
+     "date": null
+    }
+   ],
+   "details": {
+    "api": "search",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "query": "site:docs.langchain.com LangChain v1 migration create_react_agent deprecated create_agent AgentExecutor langchain-classic",
+    "seconds": 5.21,
+    "retries": 0,
+    "n": 5,
+    "urls": [
+     "https://docs.langchain.com/oss/python/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/javascript/migrate/langchain-v1",
+     "https://docs.langchain.com/oss/javascript/langchain/agents",
+     "https://docs.langchain.com/oss/python/releases/langchain-v1",
+     "https://docs.langchain.com/oss/python/migrate/langgraph-supervisor"
+    ],
+    "cost_usd": 0.001
+   }
+  },
+  "f7973dfe1d946689ce68e6fab447abfa62d79a927c4b0042d54c50048d14cd9c": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_0173DvxDSdNFVy3hhvo2vAiF",
+      "type": "function",
+      "function": {
+       "name": "submit_verdict",
+       "arguments": "{\"verdict\": \"YELLOW\", \"reason\": \"\\ubaa9\\ud45c \\ud658\\uacbd(langchain 1.5.0)\\uc5d0\\uc11c\\ub294 `langchain.agents`\\uc5d0 `create_react_agent`\\uac00 \\uc5c6\\uace0, `langgraph.prebuilt.create_react_agent`\\ub294 deprecated\\ub85c \\ud655\\uc778\\ub410\\uc5b4\\uc694. \\uacf5\\uc2dd \\ubb38\\uc11c\\ub294 LangChain 1.0\\uc5d0\\uc11c `create_agent`\\ub97c \\ud45c\\uc900 \\ubc29\\uc2dd\\uc73c\\ub85c \\uc548\\ub0b4\\ud574\\uc694. \\uac19\\uc740 \\uac1c\\uc815\\uc5d0\\uc11c 7\\uc7a5 \\ucf54\\ub4dc\\ub3c4 `create_agent`\\ub85c \\ubc14\\ub00c\\uc5c8\\uc73c\\ub2c8, \\uc774 \\uc548\\ub0b4 \\ubb38\\uc7a5\\ub3c4 \\ubc14\\ub010 \\ucf54\\ub4dc\\uc5d0 \\ub9de\\uac8c \\uace0\\uccd0\\uc57c \\ud574\\uc694.\", \"citations\": [{\"evidence_id\": \"s4\", \"quote\": \"create_agent is the standard way to build agents in LangChain 1.0. It provides a simpler interface than langgraph.prebuilt.create_react_agent\"}, {\"evidence_id\": \"s1\", \"quote\": \"Existing functionality outside the focus of standard interfaces and agents has been moved to the langchain-classic package.\"}], \"fix\": \"7\\uc7a5\\uc5d0\\uc11c\\ub294 `create_agent()`\\ub85c \\uc5d0\\uc774\\uc804\\ud2b8\\ub97c \\ub9cc\\ub4e4\\uace0 \\uc2e4\\ud589\\ud55c \\ub4a4, \\uacb0\\uacfc\\ub97c \\uba54\\uc2dc\\uc9c0 \\ubaa9\\ub85d\\uc5d0\\uc11c \\uaebc\\ub0b4\\uc694.\", \"fix_note\": \"\\uac19\\uc740 \\uac1c\\uc815\\uc5d0\\uc11c \\ubc14\\ub010 7\\uc7a5 \\ucf54\\ub4dc(create_agent \\uc0ac\\uc6a9, \\uacb0\\uacfc\\ub294 \\uba54\\uc2dc\\uc9c0 \\ubaa9\\ub85d\\uc5d0\\uc11c \\uaebc\\ub0c4)\\uc5d0 \\ub9de\\ucd98 \\ubb38\\uc7a5\\uc774\\uc5d0\\uc694. [\\uc800\\uc790 \\ud655\\uc778 \\ud544\\uc694: 7\\uc7a5 \\ubcf8\\ubb38\\uc758 \\ub2e4\\ub978 \\uc124\\uba85\\uc5d0\\ub3c4 AgentExecutor \\ud45c\\ud604\\uc774 \\ub0a8\\uc544 \\uc788\\ub294\\uc9c0]\", \"confidence\": \"high\"}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 6.93,
+    "prompt_tokens": 3321,
+    "completion_tokens": 746,
+    "cost_usd": 0.0282
+   }
+  },
+  "a92b77af9bd97adfc6187799ce7dd06c9e79efacc41c4462ecd41e774f9e302d": {
+   "value": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+     {
+      "id": "toolu_01M6RBLoWM484c691ZqswdWS",
+      "type": "function",
+      "function": {
+       "name": "submit_verdict",
+       "arguments": "{\"verdict\": \"UNKNOWN\", \"reason\": \"`make_model()`\\uc740 \\uacf5\\uac1c \\ud328\\ud0a4\\uc9c0\\uac00 \\uc544\\ub2cc `vivo_demo` \\ubaa8\\ub4c8\\uc5d0 \\uc788\\uace0, \\ubaa9\\ud45c \\ud658\\uacbd\\uc5d0\\uc11c\\ub294 `No module named 'vivo_demo'` \\uc624\\ub958\\uac00 \\ub098\\uc11c \\uc774 \\ubb38\\uc7a5\\uc774 \\ub9de\\ub294\\uc9c0 \\ud655\\uc778\\ud560 \\uc218 \\uc5c6\\uc5b4\\uc694. \\uacf5\\uac1c\\ub41c \\uacf5\\uc2dd \\ubb38\\uc11c\\ub098 \\ud328\\ud0a4\\uc9c0 \\uc815\\ubcf4\\ub3c4 \\uc5c6\\uc5b4\\uc11c API \\ud0a4 \\uc5c6\\uc774 \\uc2e4\\ud589\\ub418\\ub294\\uc9c0 \\ud310\\ub2e8\\ud560 \\uadfc\\uac70\\uac00 \\uc5c6\\uc5b4\\uc694. \\uac19\\uc740 \\uac1c\\uc815\\ud310\\uc758 4\\uc7a5\\uc740 `make_chat_model`, 7\\uc7a5\\uc740 `make_model`\\uc744 \\uc4f0\\ubbc0\\ub85c [\\uc800\\uc790 \\ud655\\uc778 \\ud544\\uc694: vivo_demo\\ub97c \\ubc30\\ud3ec\\ud558\\ub294 \\ubc29\\ubc95\\uacfc \\ub450 \\ud5ec\\ud37c\\uac00 \\ubaa8\\ub450 API \\ud0a4 \\uc5c6\\uc774 \\ub3d9\\uc791\\ud558\\ub294\\uc9c0].\", \"citations\": [], \"confidence\": \"medium\", \"fix\": null, \"fix_note\": null}"
+      }
+     }
+    ]
+   },
+   "details": {
+    "api": "agent-router",
+    "item": "living-4281828ce06f44da9e4c75483d805d88",
+    "router": "liner-claude-router",
+    "served_model": "claude-opus-5.5",
+    "seconds": 5.18,
+    "prompt_tokens": 2303,
+    "completion_tokens": 564,
+    "cost_usd": 0.02049
+   }
+  }
+ }
+}

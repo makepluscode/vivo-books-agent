@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VIVO BOOKS · 기술서 갱신 점검</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#1c1c1a;--muted:#6c6b66;--card:#fff;--line:#e3e1da;--code:#f1efe9;
+--red:#d64545;--yellow:#c99a06;--green:#2f9e5b;--gray:#8b8a85;--accent:#2F52A8;--redbg:#fbeaea;--yellowbg:#fbf3d9;--greenbg:#E4EBFC;--graybg:#efeeea}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--fg:#ecebe6;--muted:#a2a19b;--card:#1d1d1b;--line:#33322e;--code:#232321;
+--redbg:#3a1f1f;--yellowbg:#3a321a;--greenbg:#23283C;--graybg:#262624;--accent:#7FA1F0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 -apple-system,"Pretendard","Noto Sans KR",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+h1{font-size:17px;margin:0 12px 0 0} h1 small{font-weight:400;color:var(--muted);font-size:12px;margin-left:6px}
+select,button{font:inherit;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+button:disabled{opacity:.5}
+.counts{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.pill{border:1px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card);white-space:nowrap}
+#target{flex-basis:100%;color:var(--muted);font-size:12px}
+main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:14px;padding:14px 16px;max-width:1400px;margin:0 auto}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.panel h2{font-size:13px;margin:0;padding:8px 12px;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600}
+#ms{font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:calc(100vh - 150px);overflow:auto}
+.ln{display:flex;border-left:4px solid transparent;transition:background .4s}
+.ln .n{width:38px;text-align:right;color:var(--muted);padding-right:8px;user-select:none;flex:none}
+.ln .c{white-space:pre-wrap;word-break:break-all;padding-right:8px}
+.ln.busy{background:color-mix(in srgb,var(--accent) 10%,transparent);border-left-color:var(--accent)}
+.ln.RED{background:var(--redbg);border-left-color:var(--red)} .ln.YELLOW{background:var(--yellowbg);border-left-color:var(--yellow)}
+.ln.GREEN{background:var(--greenbg);border-left-color:var(--green)} .ln.UNKNOWN{background:var(--graybg);border-left-color:var(--gray)}
+#right{display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 150px)}
+#items{overflow:auto;flex:1 1 60%}
+.it{padding:8px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+.it:hover{background:var(--code)}
+.it .top{display:flex;gap:8px;align-items:baseline}
+.it .loc{color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}
+.it .reason{color:var(--muted);font-size:12.5px;margin-top:2px}
+.stages{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.st{font-size:11px;border:1px solid var(--line);border-radius:6px;padding:0 6px;color:var(--muted)}
+.st.on{border-color:var(--accent);color:var(--accent)} .st.ok{border-color:var(--green);color:var(--green)} .st.bad{border-color:var(--red);color:var(--red)}
+.v{font-weight:700;white-space:nowrap}
+#api{overflow:auto;flex:1 1 40%;font:12px/1.5 ui-monospace,Menlo,monospace}
+.api{padding:3px 12px;border-bottom:1px dashed var(--line);display:flex;gap:8px}
+.api b{min-width:92px} .api .q{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.tag{font-size:11px;border-radius:6px;padding:0 6px;background:var(--code)}
+#done{display:none;gap:8px;flex-wrap:wrap} #done a{color:var(--accent);font-weight:600}
+.muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <h1>📘 기술서 갱신 점검 에이전트<small>VIVO BOOKS · Liner API</small></h1>
+  <a href="/living" style="color:var(--accent);font-weight:600">VIVO BOOKS · 살아 있는 기술서 →</a>
+  <select id="sample"></select>
+  <label class="pill"><input type="checkbox" id="agentMode" checked> Liner 에이전트</label>
+  <button class="primary" id="live">실시간 점검</button>
+  <select id="rec"><option value="">기록 재생…</option></select>
+  <button id="replay">재생</button>
+  <span id="timer" class="pill">0.0s</span>
+  <div class="counts">
+    <span class="pill">🔴 <b id="cRED">0</b></span><span class="pill">🟡 <b id="cYELLOW">0</b></span>
+    <span class="pill">⚪ <b id="cUNKNOWN">0</b></span><span class="pill">🟢 <b id="cGREEN">0</b></span>
+    <span class="pill">Liner 호출 <b id="cApi">0</b></span>
+  </div>
+  <div id="target">원고를 고르고 ‘실시간 점검’을 누르세요. 점검 기준은 점검일의 최신 안정 버전이에요.</div>
+  <div id="done"></div>
+</header>
+<main>
+  <section class="panel"><h2>원고</h2><div id="ms"></div></section>
+  <div id="right">
+    <section class="panel" style="display:flex;flex-direction:column;min-height:0;flex:1 1 60%"><h2>점검 항목 <span id="stageMain" class="muted"></span></h2><div id="items"></div></section>
+    <section class="panel" style="display:flex;flex-direction:column;min-height:0;flex:1 1 40%"><h2>Liner API 실시간 호출</h2><div id="api"></div></section>
+  </div>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const ICON = {RED:"🔴",YELLOW:"🟡",GREEN:"🟢",UNKNOWN:"⚪"};
+const LABEL = {RED:"실행 불가",YELLOW:"권장 변경",GREEN:"최신",UNKNOWN:"판단 보류"};
+const STAGES = [["search","Liner 검색"],["run","목표 환경 실행"],["judge","Liner Router 판정"],["search_agent","Search Agent 승격"],["fix_run","수정안 실행"],["self_repair","자기 수정"]];
+const RUNTXT = {ok:"✅ 끝까지 실행",needs_api:"🔑 API 직전까지",context:"🧩 문맥 필요",fail:"❌ 실패",timeout:"⏱️ 시간 초과",skipped:"⏭️ 생략"};
+let items = {}, counts = {}, apiN = 0, t0 = 0, tick = null, es = null;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+async function init(){
+  const r = await (await fetch("/api/samples")).json();
+  $("#sample").innerHTML = r.samples.map(s => `<option>${esc(s)}</option>`).join("");
+  $("#rec").innerHTML = '<option value="">기록 재생…</option>' + r.recordings.map(x => `<option value="${esc(x.id)}">${esc(x.sample)} · ${esc(x.id)}</option>`).join("");
+  try { const last = localStorage.getItem("drift.sample"); if (last && r.samples.includes(last)) $("#sample").value = last; } catch(e) {}
+  loadMs($("#sample").value);
+}
+function showMs(md){
+  $("#ms").innerHTML = String(md || "").split("\n").map((l,i) => `<div class="ln" id="L${i+1}"><span class="n">${i+1}</span><span class="c">${esc(l) || " "}</span></div>`).join("");
+}
+async function loadMs(name){
+  const r = await fetch("/api/sample?name=" + encodeURIComponent(name));
+  showMs(r.ok ? (await r.json()).md : "(원고를 불러오지 못했어요)");
+}
+function reset(){
+  items = {}; counts = {RED:0,YELLOW:0,GREEN:0,UNKNOWN:0}; apiN = 0;
+  ["RED","YELLOW","GREEN","UNKNOWN"].forEach(k => $("#c"+k).textContent = 0); $("#cApi").textContent = 0;
+  $("#items").innerHTML = ""; $("#api").innerHTML = ""; $("#done").style.display = "none"; $("#stageMain").textContent = "";
+  document.querySelectorAll(".ln").forEach(e => e.className = "ln");
+  t0 = performance.now(); clearInterval(tick);
+  tick = setInterval(() => $("#timer").textContent = ((performance.now()-t0)/1000).toFixed(1)+"s", 100);
+}
+function paint(id, cls){
+  const it = items[id]; if (!it) return;
+  for (let l = it.lines[0]; l <= it.lines[1]; l++){ const e = $("#L"+l); if (e && !(cls === "busy" && /RED|YELLOW|GREEN|UNKNOWN/.test(e.className))) e.className = "ln " + cls; }
+}
+function renderItem(id){
+  const it = items[id]; let el = $("#I_"+CSS.escape(id));
+  if (!el){ el = document.createElement("div"); el.className = "it"; el.id = "I_"+id; $("#items").appendChild(el);
+    el.onclick = () => $("#L"+it.lines[0])?.scrollIntoView({behavior:"smooth",block:"center"}); }
+  const v = it.verdict;
+  el.innerHTML = `<div class="top"><span class="v">${v ? ICON[v]+" "+LABEL[v] : "⏳"}</span><span>${esc(it.subject)}</span><span class="loc">${it.lines[0]}–${it.lines[1]}줄 · ${esc(it.kind)}${it.seconds ? " · "+it.seconds+"s" : ""}</span></div>
+    <div class="stages">${STAGES.filter(([k]) => it.stages[k]).map(([k,n]) => `<span class="st ${it.stages[k]}">${n}${k==="run"&&it.run?" "+RUNTXT[it.run]:""}${k==="fix_run"&&it.fixRun?" "+RUNTXT[it.fixRun]:""}${k==="search"&&it.nEv?" · 근거 "+it.nEv+"건":""}</span>`).join("")}</div>
+    ${it.reason ? `<div class="reason">${esc(it.reason)}</div>` : ""}`;
+}
+function handle(ev){
+  if (ev.type === "start"){ $("#target").textContent = `목표 환경: ${ev.target}  ·  모드: ${ev.mode}`; }
+  else if (ev.type === "stage" && !ev.item){ $("#stageMain").textContent = "· Liner Router로 원고에서 점검 항목 추출 중…"; }
+  else if (ev.type === "items"){
+    $("#stageMain").textContent = `· ${ev.items.length}개 항목 추출 (${ev.seconds}s)`;
+    ev.items.forEach(x => { items[x.id] = {...x, stages:{}}; renderItem(x.id); });
+  }
+  else if (ev.type === "stage"){
+    const it = items[ev.item]; if (!it) return;
+    Object.keys(it.stages).forEach(k => { if (it.stages[k] === "on") it.stages[k] = "ok"; });
+    it.stages[ev.stage] = "on"; paint(ev.item, "busy"); renderItem(ev.item);
+  }
+  else if (ev.type === "agent_step"){
+    const it = items[ev.item]; if (!it) return;
+    const stage = {liner_search:"search", liner_deep_research:"search_agent", run_example:"fix_run",
+                   check_install:"fix_run", submit_verdict:"judge"}[ev.tool];
+    Object.keys(it.stages).forEach(k => { if (it.stages[k] === "on") it.stages[k] = "ok"; });
+    if (stage) it.stages[stage] = (ev.tool === "submit_verdict" && ev.accepted === false) ? "bad" : "on";
+    if (ev.tool === "liner_search") it.nEv = (it.nEv || 0) + (ev.results || 0);
+    paint(ev.item, "busy"); renderItem(ev.item);
+  }
+  else if (ev.type === "evidence"){ const it = items[ev.item]; if (it){ it.nEv = ev.urls.length; renderItem(ev.item); } }
+  else if (ev.type === "run"){ const it = items[ev.item]; if (it){ it.run = ev.status; it.stages.run = ev.status === "fail" ? "bad" : "ok"; renderItem(ev.item); } }
+  else if (ev.type === "verdict"){
+    const it = items[ev.item]; if (!it || it.verdict) return;
+    Object.keys(it.stages).forEach(k => { if (it.stages[k] === "on") it.stages[k] = "ok"; });
+    it.verdict = ev.verdict; it.reason = ev.reason; it.seconds = ev.seconds; it.fixRun = ev.fix_run;
+    if (ev.fix_run) it.stages.fix_run = ["ok","needs_api","context"].includes(ev.fix_run) ? "ok" : "bad";
+    counts[ev.verdict]++; $("#c"+ev.verdict).textContent = counts[ev.verdict];
+    paint(ev.item, ev.verdict); renderItem(ev.item);
+  }
+  else if (ev.type === "api"){
+    apiN++; $("#cApi").textContent = apiN;
+    const name = {search:"Search",search_agent:"Search Agent",extract:"Router·추출",judge:"Router·판정",merge:"Router·병합","agent-inspect":"Router·에이전트"}[ev.api] || ev.api;
+    const d = document.createElement("div"); d.className = "api";
+    d.innerHTML = `<b>${esc(name)}</b><span class="tag">${esc(ev.served_model || (ev.n != null ? ev.n+"건" : ""))}</span><span class="q">${esc(ev.item || "")} ${esc(ev.query || ev.question || "")}</span><span>${ev.seconds}s</span>`;
+    $("#api").prepend(d);
+  }
+  else if (ev.type === "done"){
+    clearInterval(tick); $("#timer").textContent = ev.seconds + "s";
+    $("#done").innerHTML = `✅ 완료 · <a href="${esc(safeOut(ev.report))}" target="_blank" rel="noopener">보고서 열기</a> <a href="${esc(safeOut(ev.errata))}" target="_blank" rel="noopener">정오표</a> <a href="${esc(safeOut(ev.diff))}" target="_blank" rel="noopener">원고 diff</a>`;
+    $("#done").style.display = "flex"; $("#live").disabled = false; $("#replay").disabled = false;
+  }
+  else if (ev.type === "error"){ clearInterval(tick); $("#target").textContent = "오류: " + ev.message; $("#live").disabled = false; $("#replay").disabled = false; }
+}
+let seen = -1;
+function unlock(){ $("#live").disabled = false; $("#replay").disabled = false; }
+function listen(job){
+  es && es.close(); seen = -1; es = new EventSource("/api/events?job=" + job);
+  es.onmessage = m => { const id = Number(m.lastEventId); if (!isNaN(id) && id <= seen) return; seen = id; handle(JSON.parse(m.data)); };
+  es.addEventListener("end", () => { es.close(); unlock(); });
+  es.onerror = () => { if (es.readyState === EventSource.CLOSED){ clearInterval(tick); $("#target").textContent = "서버 연결이 끊겼어요. 서버를 확인한 뒤 다시 시도하세요."; unlock(); } };
+}
+const safeOut = u => /^\/out\/[\w-]+\/(report\.html|errata\.md|manuscript\.diff)$/.test(u || "") ? u : "#";
+$("#sample").onchange = e => { try { localStorage.setItem("drift.sample", e.target.value); } catch(_) {} loadMs(e.target.value); };
+$("#live").onclick = async () => {
+  if (!confirm("Liner API를 실제로 호출해요(원고 1장 약 $0.3). 진행할까요?")) return;
+  reset(); $("#live").disabled = true; $("#replay").disabled = true;
+  const r = await fetch("/api/run", {method:"POST", body: JSON.stringify({name: $("#sample").value, mode: $("#agentMode").checked ? "agent" : "pipeline"})});
+  const j = await r.json(); if (!r.ok){ alert(j.error); $("#live").disabled = false; $("#replay").disabled = false; return; }
+  listen(j.job);
+};
+$("#replay").onclick = async () => {
+  const id = $("#rec").value; if (!id) return alert("재생할 기록을 고르세요");
+  const r = await fetch("/api/replay", {method:"POST", body: JSON.stringify({id, speed: 4})});
+  const j = await r.json(); if (!r.ok) return alert(j.error);
+  if ([...$("#sample").options].some(o => o.value === j.sample)) $("#sample").value = j.sample;
+  showMs(j.md); reset(); $("#live").disabled = true; $("#replay").disabled = true; listen(j.job);
+};
+init();
+</script>
+</body>
+</html>

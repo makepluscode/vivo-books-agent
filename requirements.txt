@@ -1,0 +1,5 @@
+# 에이전트 실행 환경(.venv)
+requests>=2.32
+openai>=1.50
+python-dotenv>=1.0
+packaging>=24

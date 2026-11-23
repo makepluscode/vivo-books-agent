@@ -1,0 +1,293 @@
+"""제출용 A안 기획서 HTML을 만들어요.
+
+    python docs/proposal/build.py
+    Chromium에서 proposal.html을 열어 배경 그래픽을 포함한 A4 PDF로 출력해요.
+"""
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+TITLE = "VIVO BOOKS — 살아 있는 기술서"
+SUBTITLE = "기술서의 낡은 코드와 설명을 찾아 고치는 도구"
+TEAM = "비보랩스(VIVO LABS)"
+STORY = (
+    "저는 <b>8개월</b> 동안 원고를 쓰고 <b>2개월</b>의 편집을 거쳐 <b>2026년 1월</b>에 "
+    "『올라마와 오픈소스 LLM을 활용한 AI 에이전트 개발 입문』을 냈어요. "
+    "책을 준비하는 사이 LangChain의 주요 버전이 바뀌었고, 출간 직후 독자들이 오류를 알려 왔어요."
+)
+PAINS = [
+    ("독자", "책대로 따라 해도 예제가 멈추고, 고친 코드와 책 설명이 달라 헤매요."),
+    ("저자", "이틀 동안 64개 파일을 손으로 고쳤지만 오류가 한 곳 남았어요."),
+    ("출판사", "이미 팔린 책에 고친 내용을 반영하기 어려워요."),
+]
+ROLES = [
+    ("Liner Router", "다음 작업 선택", "오류를 읽고 검색, 수정, 다시 실행하기 중 다음 작업을 골라요."),
+    ("Liner Search", "공식 문서 검색", "공식 문서에서 바뀐 기능과 수정 근거를 찾아요."),
+    ("Liner Search Agent", "선택형 추가 조사", "별도 장 점검 실험에서 한 번 썼어요."),
+]
+TRACE = ["공식 문서 찾기", "첫 수정 실패", "다시 고쳐 실행", "검증 통과"]
+SOLUTION_SCENES = ["예제가 멈춰요", "Liner가 고쳐요", "Liner가 실행해요", "저자가 검토해요"]
+KPIS = [
+    ("27/27", "장 점검 판정 일치", "가상 원고 3장 기준. 개발 때 보지 않은 원고도 11/11."),
+    ("가상 기술서 4장", "현재 데모 결과", "1·4·7장과 예제 파일 개정, 3장 유지. 정오표·EPUB 생성."),
+    ("PR #2", "공개 GitHub 실연", "공개 저장소 vivo-books-sample-book에 개정 PR. 같은 기록으로 재생돼요."),
+    ("약 65초 · $0.37", "장 1회 점검 평균", "최종 3장 실행 시간과 7회 호출 비용 기준."),
+]
+COMPARISON = [
+    ("7장 예제 코드", "목표 버전에서 <code>Tool</code> import부터 실패했어요.",
+     "<code>create_agent</code>로 바꿔 실행 검사를 통과했어요."),
+    ("1장 본문·설치 명령", "LangChain <b>0.3.25</b> 기준",
+     "검증한 LangChain <b>1.5.0</b>으로 맞췄어요."),
+]
+
+CSS = """
+  :root {
+    --ink:#23283C; --body:#39445A; --muted:#535F76; --accent:#2F52A8;
+    --flower:#7FA1F0; --soft:#F4F7FE; --blue-pale:#E4EBFC; --line:#DCE3F5;
+  }
+  @page { size:A4; margin:11mm 13mm; }
+  * { box-sizing:border-box; }
+  html { background:#fff; }
+  body {
+    margin:0; color:var(--body); font:10.5pt/1.55 "Noto Sans CJK KR","Noto Sans KR",sans-serif;
+    word-break:keep-all; overflow-wrap:anywhere;
+    print-color-adjust:exact; -webkit-print-color-adjust:exact;
+  }
+  p, h1, h2, h3, figure, blockquote { margin:0; }
+  section, .head { break-inside:avoid; }
+  h1, h2, h3, b { color:var(--ink); }
+  h1, .mont { font-family:Montserrat,"Noto Sans CJK KR",sans-serif; }
+  h1 { font-size:22pt; line-height:1.15; font-weight:800; }
+  h2 { font-size:14pt; line-height:1.3; margin:17px 0 9px; }
+  h2 small { font-size:9.4pt; font-weight:500; color:var(--muted); margin-left:7px; }
+  h3 { font-size:10pt; }
+  code { font:0.92em "Noto Sans Mono CJK KR",monospace; color:var(--accent); }
+  img { display:block; max-width:100%; }
+  .head {
+    display:grid; grid-template-columns:1fr auto; gap:3px 22px; align-items:center;
+    border-bottom:2px solid var(--ink); padding-bottom:9px;
+  }
+  .head .subtitle { color:var(--accent); font-size:11pt; font-weight:700; margin-top:3px; }
+  .head .intro { grid-column:1/-1; margin-top:4px; }
+  .head .meta { text-align:right; color:var(--muted); font-size:8.6pt; }
+  .logo { height:30px; margin:0 0 2px auto; }
+  .hero, .art, .workflow { border:1px solid var(--line); border-radius:9px; }
+  .hero { padding:4px; }
+  .hero img { max-height:44mm; margin:0 auto; }
+  .story {
+    display:grid; grid-template-columns:minmax(0, 2.05fr) minmax(0, 1fr);
+    gap:12px; align-items:center; margin:10px 0;
+  }
+  blockquote {
+    border-left:3px solid var(--flower); border-radius:0 6px 6px 0;
+    padding:7px 9px; background:var(--soft); color:var(--ink); font-size:9.5pt;
+  }
+  .stat {
+    display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:center;
+    padding:9px 14px; border-radius:9px; background:var(--ink); color:var(--blue-pale);
+  }
+  .stat .number { font-size:36pt; font-weight:800; line-height:1; color:#fff; }
+  .stat h3 { color:#fff; font-size:12pt; }
+  .stat h3 b { color:#BDD0FF; }
+  .stat p { margin-top:3px; font-size:9pt; }
+  .nowrap { white-space:nowrap; }
+  .pains, .roles, .metrics { display:grid; gap:8px; }
+  .pains, .roles { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .pains { margin-top:8px; }
+  .tile { border:1px solid var(--line); border-radius:8px; padding:8px 9px; }
+  .tile p { margin-top:3px; }
+  .pains h3, .roles .name { color:var(--accent); }
+  .pains p, .roles p { font-size:10pt; }
+  .roles .tile { position:relative; }
+  .roles h3 { padding-right:24px; }
+  .roles .liner-ci { position:absolute; top:9px; right:9px; width:17px; height:17px; }
+  .workflow { display:block; margin-top:4px; width:100%; padding:7px; }
+  .solution-copy { margin:7px 0; }
+  .solution { padding:4px 0 5px; }
+  .solution-art, .solution figcaption { width:84%; margin:0 auto; }
+  .solution-art { position:relative; }
+  .solution-image { width:100%; }
+  .solution .author-smile {
+    position:absolute; top:26.39%; left:74%; width:7.875%;
+    mask-image:linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  }
+  .solution .liner-mark {
+    position:absolute; top:36.5%; left:36.5%; transform:translate(-50%,-50%);
+    width:33px; height:33px; padding:6px;
+    background:#fff; border:1px solid var(--line); border-radius:50%;
+  }
+  .solution-steps {
+    display:grid; grid-template-columns:24fr 26fr 18fr 32fr;
+    padding:0; margin:2px 0 0; list-style:none; text-align:center;
+    color:var(--accent); font-size:9.5pt; font-weight:700; line-height:1.45;
+  }
+  .page-two { break-before:page; }
+  .page-two section:first-child h2 { margin-top:0; }
+  .page-two section + section h2 { margin-top:24px; }
+  .trace {
+    display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); column-gap:16px;
+    padding:0; margin:5px 0 7px; list-style:none; font-size:9.2pt;
+  }
+  .trace li { position:relative; text-align:center; background:var(--soft); border-radius:5px; padding:4px 3px; }
+  .trace li + li::before { content:"→"; position:absolute; right:100%; width:16px; color:var(--accent); }
+  .trace li:last-child { background:var(--blue-pale); color:var(--accent); font-weight:700; }
+  .trace-title { margin-top:8px; font-weight:700; color:var(--ink); }
+  .proof { font-size:9.5pt; color:var(--muted); }
+  .metrics { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .metrics .value { display:block; color:var(--accent); font-size:15pt; font-weight:800; line-height:1.15; }
+  .metrics h3 { margin-top:4px; font-size:9.6pt; }
+  .metrics p { font-size:9.3pt; }
+  .compare { width:100%; table-layout:fixed; margin-top:10px; border-collapse:collapse; font-size:10pt; }
+  .compare col:first-child { width:21%; }
+  .compare th, .compare td { text-align:left; vertical-align:top; padding:6px 8px; border-bottom:1px solid var(--line); }
+  .compare thead { background:var(--soft); color:var(--accent); }
+  .compare tbody th { color:var(--ink); }
+  .verification {
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-top:8px;
+    font-size:9.7pt;
+  }
+  .verification .tile { background:var(--soft); }
+  .verification h3 { color:var(--accent); }
+  .future {
+    display:grid; grid-template-columns:minmax(0, 3fr) minmax(0, 7fr);
+    align-items:center; gap:12px; margin-top:8px;
+  }
+  .future img { width:100%; height:auto; }
+  .future p + p { margin-top:4px; }
+  .mention { color:var(--muted); font-size:8.8pt; }
+  .credits {
+    display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:12px;
+    background:var(--soft); border-radius:7px; padding:8px 10px; font-size:9.5pt;
+  }
+  .credits h3 { color:var(--accent); font-size:9.4pt; }
+  .credits p { margin-top:2px; }
+  .foot { font-size:8.8pt; color:var(--muted); margin-top:7px; }
+  @media screen { body { max-width:184mm; margin:24px auto; padding:0 12px; } .page-two { margin-top:24px; } }
+"""
+
+
+def tiles(items):
+    return "".join(f'<div class="tile"><h3>{name}</h3><p>{detail}</p></div>' for name, detail in items)
+
+
+def layout_a():
+    workflow = (HERE / "workflow.svg.html").read_text(encoding="utf-8")
+    roles = "".join(
+        f'<div class="tile"><img class="liner-ci" src="img/liner-rocket.svg" alt="">'
+        f'<h3><span class="name mont">{name}</span><br>{purpose}</h3><p>{detail}</p></div>'
+        for name, purpose, detail in ROLES
+    )
+    metrics = "".join(
+        f'<div class="tile"><strong class="value mont">{value}</strong><h3>{label}</h3><p>{detail}</p></div>'
+        for value, label, detail in KPIS
+    )
+    comparison = "".join(
+        f'<tr><th scope="row">{item}</th><td>{before}</td><td>{after}</td></tr>'
+        for item, before, after in COMPARISON
+    )
+    trace = "".join(f"<li>{step}</li>" for step in TRACE)
+    solution_steps = "".join(f"<li>{title}</li>" for title in SOLUTION_SCENES)
+    return f"""<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>{TITLE} 기획서</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>{CSS}</style>
+</head>
+<body>
+<main>
+<header class="head">
+  <div><h1>{TITLE}</h1><p class="subtitle">{SUBTITLE}</p></div>
+  <div class="meta"><img src="vivo-labs-lockup.png" alt="VIVO LABS" class="logo">
+  <b>{TEAM}</b><br>제1회 라이너 해커톤 .EXE-THON</div>
+  <p class="intro">오픈소스가 바뀌면 <b>Liner가 공식 문서를 찾아 코드와 설명을 고치고,</b>
+  실행을 확인한 수정안을 저자에게 보내요.</p>
+</header>
+
+<section>
+  <h2>1. 문제 <small>출간까지 단 10개월, 그사이 예제의 오픈소스 라이브러리가 바뀌었어요</small></h2>
+  <figure class="hero"><img src="img/problem-text.jpg" alt="책 출간을 기뻐하던 저자가 예제 오류와 환불 요청을 받는 모습"></figure>
+  <div class="story">
+    <p>{STORY}</p>
+    <blockquote>“책에 나온 코드를 그대로 따라 했는데 <b>오류</b>가 납니다.”</blockquote>
+  </div>
+  <div class="stat">
+    <strong class="number mont">41%</strong>
+    <div>
+      <h3>LangChain·LangGraph 예제 파일 <b>29개 중 12개</b>에서 불러오기 오류가 났어요</h3>
+      <p>책의 공개 예제 저장소 · 업데이트된 v1.5.2에서 import 단계 확인 · <span class="nowrap">2026-11-22</span></p>
+    </div>
+  </div>
+  <div class="pains">{tiles(PAINS)}</div>
+</section>
+
+<section>
+  <h2>2. 해결 <small>새 버전 감지부터 저자의 수정안 검토까지</small></h2>
+  {workflow}
+  <p class="solution-copy">PyPI에서 새 버전을 확인하고, 책에 등록한 라이브러리로 영향받는 장을 골라요.
+  Liner 에이전트가 <b>예제와 설명을 고치고 실행을 요청</b>하면 검증기가 격리 환경에서 확인해요.
+  저자는 수정안·정오표·전자책을 검토하고 반영 여부를 정해요.</p>
+  <figure class="solution art">
+    <div class="solution-art">
+      <img class="solution-image" src="img/solution.jpg" alt="오류가 난 책, 공식 문서, 실행 검사, 수정안을 받아 든 저자">
+      <img class="liner-mark" src="img/liner-rocket.svg" alt="">
+      <img class="author-smile" src="img/solution-author-smile.png" alt="">
+    </div>
+    <figcaption><ol class="solution-steps">{solution_steps}</ol></figcaption>
+  </figure>
+</section>
+
+<div class="page-two">
+  <section>
+    <h2>3. Liner를 이렇게 써요</h2>
+    <div class="roles">{roles}</div>
+    <p class="trace-title">7장 예제를 고친 실제 순서</p>
+    <ol class="trace">{trace}</ol>
+    <p class="proof">장 점검 실험에서 인용 30건을 Liner 검색 결과 요약과 대조했고, 모두 일치했어요.</p>
+  </section>
+
+  <section>
+    <h2>4. 실제로 해봤어요</h2>
+    <div class="metrics">{metrics}</div>
+    <table class="compare" aria-label="수정 전후 비교">
+      <colgroup><col><col><col></colgroup>
+      <thead><tr><th scope="col">수정 대상</th><th scope="col">고치기 전</th><th scope="col">개정 뒤</th></tr></thead>
+      <tbody>{comparison}</tbody>
+    </table>
+    <div class="verification">
+      <div class="tile"><h3>LangChain 감지와 검증</h3><p>1.5.2 감지 · 1.5.0에서 코드 실행 및 설치 모의 확인</p></div>
+      <div class="tile"><h3>판단을 보류했어요</h3><p>1장의 테스트용 모델 설명 한 곳은 판단을 보류하고 원문을 유지했어요.</p></div>
+    </div>
+    <p class="foot">시연은 PyPI·Liner 기록을 쓰고 테스트 모델로 예제를 다시 실행해요. 근거는 저장소 <code>README.md</code>에 있어요.</p>
+  </section>
+
+  <section>
+    <h2>5. 앞으로 <small>VIVO BOOKS의 살아 있는 책</small></h2>
+    <div class="future">
+      <img class="art" src="img/vivo.jpg" alt="독자, 저자, 출판사가 함께 책을 갱신하는 VIVO BOOKS의 구상">
+      <div>
+        <p><b>이번에 만든 것</b>은 저자가 수정안과 개정 전자책을 검토하는 흐름이에요.</p>
+        <p><b>다음 목표</b>는 승인한 최신판을 독자에게 배포하고 주문형 인쇄에 연결하는 거예요.</p>
+        <p>다른 책은 장별 라이브러리, 기대 출력, 테스트 환경을 정해요.
+        비슷한 15장 점검의 API 비용은 약 $6로 추정해요. 환경 준비 비용은 별도예요.</p>
+        <p class="mention">VIVO BOOKS 아이디어는 모두의창업 1·2차에서 선정됐어요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. 기존 결과물과 이번에 만든 부분</h2>
+    <div class="credits">
+      <div><h3>기존 자료</h3><p>제 출간 경험과 비보랩스 발표 그림을 바탕으로 문제를 설명했어요. 그림은 BizRouter로 다시 그렸어요.</p></div>
+      <div><h3>이번 해커톤</h3><p>Liner 개정 도구, 실행 검증, GitHub 수정 제안, 공개 가상 기술서와 웹 데모를 새로 만들었어요. 자동 테스트 92개가 통과했어요.</p></div>
+    </div>
+  </section>
+</div>
+</main>
+</body>
+</html>
+"""
+
+
+if __name__ == "__main__":
+    (HERE / "proposal.html").write_text(layout_a(), encoding="utf-8")

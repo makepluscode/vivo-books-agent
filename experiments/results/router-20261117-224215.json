@@ -1,0 +1,774 @@
+[
+  {
+    "ttft_s": 1.91,
+    "total_s": 6.45,
+    "served_model": "claude-sonnet-5.5",
+    "usage": {
+      "completion_tokens": 729,
+      "prompt_tokens": 1017,
+      "total_tokens": 1746,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경(langchain==1.0.3)에서 `from langchain.chains import LLMChain`은 ModuleNotFoundError로 실행되지 않습니다. 검색 근거인 LangChain v1 마이그레이션 가이드는 LLMChain, ConversationChain 등 레거시 체인이 v1에서 정리되었다고 설명합니다. 다만 제공된 스니펫은 일부만 보여 주므로, 레거시 체인이 별도 패키지(langchain-classic 등)로 옮겨졌는지와 정확한 패키지명·import 경로는 근거에서 확인되지 않았습니다. 같은 맥락에서 `langchain.prompts` 경로도 v1에서 유지되는지 근거로 확인되지 않았습니다. 안전한 대안으로 `langchain_core.prompts.PromptTemplate`를 쓰고, LLMChain 대신 LCEL 파이프(`prompt | llm`)와 `invoke`를 사용하는 코드를 제안합니다. 이 수정 코드는 제가 실행해 검증한 것이 아니므로, 독자 환경(Python 3.12, langchain 1.0.3, langchain-openai 1.0.1)에서 실제로 돌려 확인한 뒤 원고에 반영하세요. 실행 시에는 OPENAI_API_KEY 환경변수도 필요합니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nllm = ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nchain = prompt | llm\\nresponse = chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"})\\nprint(response.content)\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\",\"https://docs.langchain.com/oss/python/releases/langchain-v1\"]}",
+    "router": "liner-claude-router",
+    "task": "hard+evidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 2
+    }
+  },
+  {
+    "ttft_s": 1.31,
+    "total_s": 5.28,
+    "served_model": "claude-sonnet-5.5",
+    "usage": {
+      "completion_tokens": 658,
+      "prompt_tokens": 1017,
+      "total_tokens": 1675,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경(langchain==1.0.3)에서 `from langchain.chains import LLMChain`은 ModuleNotFoundError로 실행되지 않습니다. 검색 근거인 LangChain v1 마이그레이션 가이드는 레거시 체인(LLMChain, ConversationChain 등)이 v1에서 변경 대상이라고 안내합니다. 다만 제공된 근거에는 발췌문만 있어 정확한 대체 위치(예: langchain-classic 패키지)는 확인하지 못했습니다. 일반적으로 v1에서는 체인 대신 LCEL 방식(프롬프트 | 모델)으로 쓰는 것이 권장되고, `langchain.prompts` 경로 역시 v1에서 정리되었을 가능성이 있어 `langchain_core.prompts`를 쓰는 편이 안전합니다. 아래 수정 코드는 실행해 검증하지 않았으므로 독자 환경에서 한 번 돌려 확인해야 합니다. 또한 `chain.run()`은 `invoke()`로 바뀌며, 반환값이 문자열이 아니라 메시지 객체이므로 `.content`로 텍스트를 꺼냅니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nprint(chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"}).content)\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\",\"https://docs.langchain.com/oss/python/releases/langchain-v1\"]}",
+    "router": "liner-claude-router",
+    "task": "hard+evidence",
+    "rep": 1,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 2
+    }
+  },
+  {
+    "ttft_s": 1.4,
+    "total_s": 5.51,
+    "served_model": "claude-sonnet-5.5",
+    "usage": {
+      "completion_tokens": 663,
+      "prompt_tokens": 1017,
+      "total_tokens": 1680,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경(langchain 1.0.3)에서 `from langchain.chains import LLMChain`은 ModuleNotFoundError로 실행되지 않습니다. 근거로 제시된 LangChain v1 마이그레이션 가이드는 레거시 체인(LLMChain, ConversationChain 등)이 v1에서 변경 대상이라고 설명하며, 독자의 오류 메시지도 이와 일치합니다. 다만 검색 결과에는 요약문만 있어 레거시 체인의 정확한 이동 위치(langchain-classic 등)는 확인하지 못했고, 아래 수정 코드도 직접 실행해 검증하지 않았습니다. 수정안은 LLMChain 대신 LCEL 방식(프롬프트 | 모델)을 쓰는 것이며, 이 방식은 langchain-core의 Runnable 파이프 연산자와 `.invoke()`에 기반합니다. 또한 `chain.run()`은 구버전 API라 `.invoke()`로 바꿔야 합니다. 첫 import 경로(`langchain_core.prompts`)와 `.invoke` 동작은 마이그레이션 가이드에서 최종 확인하길 권합니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nresult = chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"})\\nprint(result.content)\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\",\"https://docs.langchain.com/oss/python/releases/langchain-v1\"]}",
+    "router": "liner-claude-router",
+    "task": "hard+evidence",
+    "rep": 2,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 2
+    }
+  },
+  {
+    "ttft_s": 0.97,
+    "total_s": 5.25,
+    "served_model": "claude-sonnet-5.5",
+    "usage": {
+      "completion_tokens": 693,
+      "prompt_tokens": 498,
+      "total_tokens": 1191,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경(langchain==1.0.3)에서 `from langchain.chains import LLMChain`은 ModuleNotFoundError로 실행되지 않습니다. 제가 알기로 langchain 1.0 릴리스에서 기존 체인 클래스(LLMChain 등)와 `langchain.prompts` 같은 레거시 모듈이 `langchain-classic` 패키지로 분리되었고, 메인 `langchain` 패키지에서는 에이전트 중심의 최소 API만 남았습니다. 독자가 겪은 오류 메시지도 이와 일치합니다. 다만 외부 근거 자료가 제공되지 않았고 아래 수정 코드를 실제로 실행해 검증하지는 않았으므로, 정확한 이전 경로는 공식 마이그레이션 가이드로 확인하시기 바랍니다. 권장 수정은 LLMChain 대신 LCEL 방식(`prompt | llm`)을 쓰고, `PromptTemplate`은 `langchain_core.prompts`에서 가져오며, `chain.run()` 대신 `invoke()`를 사용하는 것입니다. 대안으로 `pip install langchain-classic` 후 `from langchain_classic.chains import LLMChain`으로 기존 코드를 유지할 수도 있으나, 이 경로 역시 실행 검증은 하지 못했습니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_core.output_parsers import StrOutputParser\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\") | StrOutputParser()\\nprint(chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"}))\",\"sources\":[]}",
+    "router": "liner-claude-router",
+    "task": "hard-noevidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": false,
+      "n_sources": 0
+    }
+  },
+  {
+    "ttft_s": 0.89,
+    "total_s": 1.09,
+    "served_model": "claude-haiku-5.5",
+    "usage": {
+      "completion_tokens": 8,
+      "prompt_tokens": 38,
+      "total_tokens": 46,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "안녕하세요",
+    "router": "liner-claude-router",
+    "task": "easy",
+    "rep": 0
+  },
+  {
+    "ttft_s": 6.25,
+    "total_s": 9.37,
+    "served_model": "gpt-6.1-sol",
+    "usage": {
+      "completion_tokens": 356,
+      "prompt_tokens": 625,
+      "total_tokens": 981,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 126,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\n  \"verdict\": \"RED\",\n  \"reason\": \"독자 환경에서 langchain.chains를 가져오는 단계에 ModuleNotFoundError가 발생하므로 원고 코드는 실행 불가입니다. Python용 v1 마이그레이션 가이드도 LLMChain을 레거시 체인으로 분류합니다. 아래는 LLMChain과 run 대신 프롬프트·모델 조합과 invoke를 사용하는 수정안이며, 해당 환경에서 직접 실행해 검증하지는 않았습니다.\",\n  \"fix\": \"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nresponse = chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"})\\nprint(response.content)\",\n  \"sources\": [\n    \"https://docs.langchain.com/oss/python/migrate/langchain-v1\"\n  ]\n}",
+    "router": "liner-gpt-router",
+    "task": "hard+evidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 3.69,
+    "total_s": 6.9,
+    "served_model": "gpt-6.1-sol",
+    "usage": {
+      "completion_tokens": 297,
+      "prompt_tokens": 625,
+      "total_tokens": 922,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 62,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경에서 langchain.chains를 찾지 못해 첫 import부터 실행이 중단됩니다. 제공된 Python v1 마이그레이션 가이드도 LLMChain을 레거시 체인으로 분류합니다. 아래는 LLMChain과 run 대신 프롬프트·모델·출력 파서를 연결하고 invoke를 사용하는 수정안입니다. 코드를 직접 실행해 검증하지는 않았으며, 모델 호출에는 유효한 OPENAI_API_KEY 설정이 필요합니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_core.output_parsers import StrOutputParser\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\") | StrOutputParser()\\nprint(chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"}))\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\"]}",
+    "router": "liner-gpt-router",
+    "task": "hard+evidence",
+    "rep": 1,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 5.31,
+    "total_s": 7.89,
+    "served_model": "gpt-6.1-sol",
+    "usage": {
+      "completion_tokens": 332,
+      "prompt_tokens": 625,
+      "total_tokens": 957,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 107,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\n  \"verdict\": \"RED\",\n  \"reason\": \"지정된 환경에서 langchain.chains를 불러오지 못하는 오류가 보고되어 원고 코드는 실행 불가입니다. 공식 Python v1 마이그레이션 가이드도 LLMChain을 레거시 체인으로 다룹니다. 수정안은 LLMChain과 run 대신 프롬프트·모델 조합과 invoke를 사용합니다. 수정 코드는 실행 검증하지 않았습니다.\",\n  \"fix\": \"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nresponse = chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"})\\nprint(response.content)\",\n  \"sources\": [\n    \"https://docs.langchain.com/oss/python/migrate/langchain-v1\"\n  ]\n}",
+    "router": "liner-gpt-router",
+    "task": "hard+evidence",
+    "rep": 2,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 3.83,
+    "total_s": 7.29,
+    "served_model": "gpt-6.1-sol",
+    "usage": {
+      "completion_tokens": 300,
+      "prompt_tokens": 291,
+      "total_tokens": 591,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 76,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\n  \"verdict\": \"RED\",\n  \"reason\": \"독자 환경에서 langchain.chains를 가져오지 못해 실행이 중단됩니다. LangChain 1.x에서는 기존 LLMChain 방식 대신 프롬프트·모델·출력 파서를 연결하는 Runnable 구성을 사용할 수 있습니다. PromptTemplate도 langchain_core.prompts에서 가져오도록 변경합니다. 아래 수정 코드는 실행 검증하지 않았으며, 모델 호출에는 유효한 OpenAI API 키와 모델 접근 권한이 필요합니다.\",\n  \"fix\": \"from langchain_core.prompts import PromptTemplate\\nfrom langchain_core.output_parsers import StrOutputParser\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\") | StrOutputParser()\\nprint(chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"}))\",\n  \"sources\": []\n}",
+    "router": "liner-gpt-router",
+    "task": "hard-noevidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": false,
+      "n_sources": 0
+    }
+  },
+  {
+    "ttft_s": 1.69,
+    "total_s": 1.85,
+    "served_model": "gpt-6-luna",
+    "usage": {
+      "completion_tokens": 42,
+      "prompt_tokens": 26,
+      "total_tokens": 68,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 34,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "안녕",
+    "router": "liner-gpt-router",
+    "task": "easy",
+    "rep": 0
+  },
+  {
+    "ttft_s": 9.8,
+    "total_s": 10.46,
+    "served_model": "gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1026,
+      "prompt_tokens": 648,
+      "total_tokens": 1674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 920,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "```json\n{\n  \"verdict\": \"RED\",\n  \"reason\": \"LangChain v1 환경(langchain==1.0.3)에서는 LLMChain 등의 레거시 체인이 포함된 langchain.chains 모듈을 불러올 수 없어 ModuleNotFoundError가 발생합니다.\",\n  \"fix\": null,\n  \"sources\": [\n    \"https://docs.langchain.com/oss/python/migrate/langchain-v1\"\n  ]\n}\n```",
+    "router": "liner-gemini-router",
+    "task": "hard+evidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": false,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 11.08,
+    "total_s": 11.81,
+    "served_model": "gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1026,
+      "prompt_tokens": 648,
+      "total_tokens": 1674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 920,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "```json\n{\n  \"verdict\": \"RED\",\n  \"reason\": \"LangChain v1 환경(langchain==1.0.3)에서는 LLMChain 등의 레거시 체인이 포함된 langchain.chains 모듈을 불러올 수 없어 ModuleNotFoundError가 발생합니다.\",\n  \"fix\": null,\n  \"sources\": [\n    \"https://docs.langchain.com/oss/python/migrate/langchain-v1\"\n  ]\n}\n```",
+    "router": "liner-gemini-router",
+    "task": "hard+evidence",
+    "rep": 1,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": false,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 9.56,
+    "total_s": 10.29,
+    "served_model": "gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1026,
+      "prompt_tokens": 648,
+      "total_tokens": 1674,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 920,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "```json\n{\n  \"verdict\": \"RED\",\n  \"reason\": \"LangChain v1 환경(langchain==1.0.3)에서는 LLMChain 등의 레거시 체인이 포함된 langchain.chains 모듈을 불러올 수 없어 ModuleNotFoundError가 발생합니다.\",\n  \"fix\": null,\n  \"sources\": [\n    \"https://docs.langchain.com/oss/python/migrate/langchain-v1\"\n  ]\n}\n```",
+    "router": "liner-gemini-router",
+    "task": "hard+evidence",
+    "rep": 2,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": false,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 7.78,
+    "total_s": 9.21,
+    "served_model": "gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 759,
+      "prompt_tokens": 281,
+      "total_tokens": 1040,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 544,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "```json\n{\n  \"verdict\": \"RED\",\n  \"reason\": \"LangChain 최신 버전에서는 레거시 모듈인 `langchain.chains.LLMChain` 및 `.run()` 메서드가 지원 중단되었거나 별도 패키지로 분리되어 `ModuleNotFoundError`가 발생합니다. 최신 권장 방식인 LCEL(LangChain Expression Language, `prompt | llm`)과 `.invoke()`를 사용해야 합니다.\",\n  \"fix\": \"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nllm = ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nchain = prompt | llm\\n\\nresult = chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"})\\nprint(result.content)\",\n  \"sources\": []\n}\n```",
+    "router": "liner-gemini-router",
+    "task": "hard-noevidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": false,
+      "n_sources": 0
+    }
+  },
+  {
+    "ttft_s": 1.78,
+    "total_s": 1.79,
+    "served_model": "gemini-3.5-flash-lite",
+    "usage": {
+      "completion_tokens": 221,
+      "prompt_tokens": 19,
+      "total_tokens": 240,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 220,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "안녕하세요",
+    "router": "liner-gemini-router",
+    "task": "easy",
+    "rep": 0
+  },
+  {
+    "ttft_s": 4.96,
+    "total_s": 7.92,
+    "served_model": "liner-mark-1.3",
+    "usage": {
+      "completion_tokens": 323,
+      "prompt_tokens": 620,
+      "total_tokens": 943,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 76,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\n  \"verdict\": \"RED\",\n  \"reason\": \"명시된 독자 환경에서 langchain.chains를 가져오는 단계에 ModuleNotFoundError가 발생하므로 원고 코드는 실행 불가입니다. 공식 Python v1 마이그레이션 가이드도 LLMChain 등을 레거시 체인으로 분류합니다. LLMChain과 run 대신 프롬프트·모델을 연결하고 invoke로 호출하는 형태로 수정하세요. 아래 수정 코드는 해당 환경에서 직접 실행해 검증하지 않았으며, API 키 등 호출 설정은 별도로 필요합니다.\",\n  \"fix\": \"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nresponse = chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"})\\nprint(response.content)\",\n  \"sources\": [\n    \"https://docs.langchain.com/oss/python/migrate/langchain-v1\"\n  ]\n}",
+    "router": "liner-mark",
+    "task": "hard+evidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 5.42,
+    "total_s": 6.55,
+    "served_model": "liner-mark-1.3",
+    "usage": {
+      "completion_tokens": 611,
+      "prompt_tokens": 620,
+      "total_tokens": 1231,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 460,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"LangChain v1에서는 LLMChain 같은 레거시 체인을 이전 방식으로 가져올 수 없어, 제시된 환경에서 원고 코드가 실행되지 않습니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nprint(chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"}).content)\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\"]}",
+    "router": "liner-mark",
+    "task": "hard+evidence",
+    "rep": 1,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 6.11,
+    "total_s": 7.86,
+    "served_model": "liner-mark-1.3",
+    "usage": {
+      "completion_tokens": 661,
+      "prompt_tokens": 620,
+      "total_tokens": 1281,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 446,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경의 langchain 1.0.3에서는 기존 `langchain.chains` 경로를 사용할 수 없어 보고된 ModuleNotFoundError가 발생합니다. v1 마이그레이션 가이드는 LLMChain 같은 레거시 체인이 분리되었음을 안내합니다.\",\"fix\":\"# langchain-classic을 설치한 뒤 실행하세요.\\n# pip install langchain-classic\\nfrom langchain_classic.chains import LLMChain\\nfrom langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = LLMChain(llm=ChatOpenAI(model=\\\"gpt-4o-mini\\\"), prompt=prompt)\\nprint(chain.run(topic=\\\"로봇 운영체제\\\"))\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\"]}",
+    "router": "liner-mark",
+    "task": "hard+evidence",
+    "rep": 2,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 1
+    }
+  },
+  {
+    "ttft_s": 4.55,
+    "total_s": 5.87,
+    "served_model": "liner-mark-1.3",
+    "usage": {
+      "completion_tokens": 506,
+      "prompt_tokens": 286,
+      "total_tokens": 792,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 330,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "{\"verdict\":\"RED\",\"reason\":\"독자 환경의 langchain==1.0.3에는 예제의 `langchain.chains` 경로가 없어 `ModuleNotFoundError`가 발생합니다. 따라서 제시된 코드는 실행되지 않습니다.\",\"fix\":\"from langchain_core.prompts import PromptTemplate\\nfrom langchain_openai import ChatOpenAI\\n\\nprompt = PromptTemplate.from_template(\\\"{topic}에 대해 한 문장으로 설명해 줘\\\")\\nchain = prompt | ChatOpenAI(model=\\\"gpt-4o-mini\\\")\\nprint(chain.invoke({\\\"topic\\\": \\\"로봇 운영체제\\\"}).content)\",\"sources\":[\"https://docs.langchain.com/oss/python/migrate/langchain-v1\",\"https://docs.langchain.com/oss/python/langchain/overview\"]}",
+    "router": "liner-mark",
+    "task": "hard-noevidence",
+    "rep": 0,
+    "grade": {
+      "json_ok": true,
+      "verdict": "RED",
+      "fix_valid_path": true,
+      "official_source": true,
+      "n_sources": 2
+    }
+  },
+  {
+    "ttft_s": 1.26,
+    "total_s": 1.39,
+    "served_model": "liner-mark-1.3",
+    "usage": {
+      "completion_tokens": 27,
+      "prompt_tokens": 26,
+      "total_tokens": 53,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": null,
+        "reasoning_tokens": 19,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "cache_write_tokens_details": {
+          "ttl_5m_tokens": 0,
+          "ttl_1h_tokens": 0,
+          "ttl_30m_tokens": 0
+        }
+      }
+    },
+    "text": "안녕",
+    "router": "liner-mark",
+    "task": "easy",
+    "rep": 0
+  }
+]

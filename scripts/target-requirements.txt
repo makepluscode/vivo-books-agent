@@ -1,0 +1,17 @@
+# 2026-11-17 점검 기준(목표 환경) 고정본. DRIFT_PIN=1 scripts/setup.sh
+--extra-index-url https://download.pytorch.org/whl/cpu
+langchain==1.5.0
+langchain-classic==1.0.8
+langchain-core==1.8.1
+langchain-openai==1.8.0
+matplotlib==3.11.2
+networkx==3.7
+numpy==2.5.5
+openai==3.52.0
+pandas==3.1.1
+pillow==13.0.0
+pydantic==2.14.3
+requests==2.34.2
+scikit-learn==1.9.1
+scipy==1.18.1
+torch==2.15.0+cpu

@@ -1,0 +1,33 @@
+<svg class="workflow" viewBox="0 0 780 156" xmlns="http://www.w3.org/2000/svg"
+     font-family="Noto Sans CJK KR, sans-serif" role="img" aria-labelledby="flow-title flow-desc">
+  <title id="flow-title">책 개정 워크플로우</title>
+  <desc id="flow-desc">새 버전을 감지하면 Liner가 공식 문서를 찾아 코드와 설명을 고치고 예제를 실행해요.
+    근거와 실행을 확인한 수정안은 저자에게 보내고, 확인이 안 된 부분은 원문과 보류 이유를 남겨요.</desc>
+  <defs>
+    <marker id="ar" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0 0 L7 3.5 L0 7Z" fill="#535F76"/>
+    </marker>
+  </defs>
+  <g stroke="#535F76" stroke-width="1.7" marker-end="url(#ar)">
+    <path d="M163 57H185"/><path d="M380 57H402"/><path d="M575 57H597"/>
+    <path d="M482 106V122" stroke-dasharray="3 3"/>
+  </g>
+  <rect x="3" y="6" width="157" height="101" rx="9" fill="#F4F7FE" stroke="#DCE3F5"/>
+  <rect x="189" y="6" width="188" height="101" rx="9" fill="#E4EBFC" stroke="#7FA1F0" stroke-width="2"/>
+  <rect x="406" y="6" width="166" height="101" rx="9" fill="#F4F7FE" stroke="#DCE3F5"/>
+  <rect x="601" y="6" width="176" height="101" rx="9" fill="#23283C"/>
+  <g font-size="16" font-weight="700" fill="#23283C">
+    <text x="16" y="35">① 새 버전 감지</text>
+    <text x="202" y="35" fill="#2F52A8">② Liner 에이전트</text>
+    <text x="419" y="35">③ 수정안 확인</text>
+    <text x="614" y="35" fill="#fff">④ 저자에게 제안</text>
+  </g>
+  <g font-size="13.5" fill="#39445A">
+    <text x="16" y="62">오픈소스 새 버전을 보고</text><text x="16" y="83">영향받는 장을 골라요</text>
+    <text x="202" y="62">공식 문서를 보고 고쳐요</text><text x="202" y="83">고친 예제도 실행해요</text>
+    <text x="419" y="62">검증기가 문서 근거와</text><text x="419" y="83">실행 결과를 확인해요</text>
+    <text x="614" y="62" fill="#E4EBFC">통과한 수정안을</text><text x="614" y="83" fill="#E4EBFC">GitHub PR로 보내요</text>
+  </g>
+  <rect x="391" y="124" width="244" height="29" rx="6" fill="#F4F7FE" stroke="#DCE3F5"/>
+  <text x="402" y="143" font-size="13" fill="#39445A">확인이 안 되면 원문과 이유를 남겨요</text>
+</svg>

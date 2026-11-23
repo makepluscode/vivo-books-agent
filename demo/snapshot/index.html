@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VIVO BOOKS · 심사 자료</title>
+  <style>
+    :root{color:#23283c;background:#f4f7fe;font:16px/1.6 "Noto Sans CJK KR","Apple SD Gothic Neo",system-ui,sans-serif}
+    *{box-sizing:border-box}
+    body{margin:0;word-break:keep-all;overflow-wrap:anywhere}
+    main{max-width:1120px;margin:auto;padding:clamp(24px,6vw,72px) clamp(20px,5vw,54px)}
+    header{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;border-bottom:1px solid #dce3f5;padding-bottom:30px}
+    h1{font-size:clamp(2.35rem,5vw,4.2rem);margin:0;line-height:1.16;letter-spacing:-.04em;word-break:keep-all}
+    h2{font-size:1.38rem;margin:0}
+    .lead{font-size:1.12rem;color:#39445a;margin:.85em 0 1.35em;max-width:31em;word-break:keep-all}
+    .art{margin:0;border:1px solid #dce3f5;border-radius:16px;background:#fff;overflow:hidden}
+    .art img{display:block;width:100%;height:auto}
+    .actions{display:flex;gap:.65rem;flex-wrap:wrap}
+    .button{display:inline-block;padding:.64rem 1rem;border-radius:8px;background:#2f52a8;color:#fff;text-decoration:none;font-weight:700}
+    .button.secondary{background:#e4ebfc;color:#203e81}
+    section{margin-top:30px}
+    .cards{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .cards li{padding:16px 18px;border:1px solid #dce3f5;border-radius:12px;background:#fff}
+    .cards b{display:block;font-size:1.04rem}
+    .cards p{margin:.18rem 0 0;color:#39445a}
+    .notes{margin-top:14px;color:#39445a}
+    a{color:#2f52a8;text-underline-offset:.2em}
+    a:focus-visible{outline:3px solid #2f52a8;outline-offset:4px}
+    footer{margin-top:30px;border-top:1px solid #dce3f5;padding-top:16px;display:flex;gap:1.2rem;flex-wrap:wrap}
+    @media(max-width:760px){header,.cards{grid-template-columns:1fr}.art{max-width:500px}header{gap:20px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>VIVO BOOKS<br>살아 있는 기술서</h1>
+      <p class="lead">오픈소스가 바뀌면 Liner가 공식 근거를 찾아 책 속 코드와 설명을 고쳐요. 실행 검증을 통과한 수정안을 저자가 검토해요.</p>
+      <nav class="actions" aria-label="개정 산출물">
+        <a class="button" href="reader.html">개정 전후 비교</a>
+        <a class="button secondary" href="https://github.com/makepluscode/vivo-books-sample-book/pull/2">공개 PR #2</a>
+        <a class="button secondary" href="preview.epub">개정 EPUB</a>
+      </nav>
+    </div>
+    <figure class="art">
+      <img src="../../docs/proposal/img/solution.jpg" alt="깨진 예제, 공식 문서 검색, 실행 확인, 검토하는 저자">
+    </figure>
+  </header>
+  <section aria-labelledby="results">
+    <h2 id="results">가상 기술서에서 확인한 결과</h2>
+    <ul class="cards">
+      <li><b>1장 · 설치와 본문</b><p>설치 명령과 API 설명을 수정했어요. 근거가 부족한 문장 한 곳은 유지했어요.</p></li>
+      <li><b>4·7장 · 예제 코드</b><p>프롬프트 체인과 날씨 도구를 다시 실행했어요. 7장은 도구 응답이 바뀐 뒤 최종 답도 달라졌어요.</p></li>
+      <li><b>3장 · 영향 없음</b><p>원고와 EPUB 장 파일의 해시를 각각 비교해 원본과 동일함을 확인했어요.</p></li>
+    </ul>
+    <p class="notes">공개 가상 기술서 저장소에 실제 PR로 올린 실행의 PyPI·Liner 응답을 재생했고, 예제는 LangChain 1.5.0에서 새로 실행했어요. 산출물은 저자 검토용 미리보기이고, PR 본문은 <a href="pr.md">pr.md</a>에도 있어요.</p>
+  </section>
+  <footer aria-label="추가 증거">
+    <a href="revision.json">실행·근거 기록</a>
+    <a href="../../docs/PROBLEM.md">41% 측정 근거</a>
+    <a href="README.md">재현 범위</a>
+    <a href="../../README.md#바로-보기">직접 실행</a>
+  </footer>
+</main>
+</body>
+</html>
