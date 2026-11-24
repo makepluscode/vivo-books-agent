@@ -61,7 +61,7 @@ AI 기술서는 출간 직후부터 라이브러리가 바뀌어 예제가 멈�
 
 ### 1. 기록 재생 — Liner 키 없이
 
-공개 PR #2를 만든 실행의 Liner 응답 20건(Router 13건·Search 7건)을 재생하고, 예제와 설치 명령은 지금 환경에서 다시 실행해요.
+공개 PR #2를 만든 실행의 Liner 응답 20건(Router 13건·Search 7건)을 재생하고, 예제와 설치 명령은 지금 환경에서 다시 실행해요. Liner 키는 필요 없지만 1장 설치 확인(`pip install --dry-run`)에는 PyPI 연결이 필요해요(연결이 안 되면 안전을 위해 개정을 보류해요). 예제 실행은 `bubblewrap`으로 네트워크가 막힌 격리 환경에서 돌아요.
 
 ```bash
 DRIFT_DEMO=1 scripts/setup.sh                           # .venv(도구)와 .target-env(목표 환경: LangChain 1.5.0)
@@ -92,7 +92,7 @@ cp .env.example .env                                    # LINER_API_KEY 입력 �
 ### 테스트
 
 ```bash
-.venv/bin/python -m unittest discover -s tests          # 92개, Liner 호출 없음
+.venv/bin/python -m unittest discover -s tests          # 101개, Liner 호출 없음
 ```
 
 격리 실행 환경(`bwrap`과 `.target-env`)이 없으면 예제를 실제로 실행하는 테스트 49개는 건너뛰어요.

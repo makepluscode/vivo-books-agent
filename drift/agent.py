@@ -490,7 +490,8 @@ def inspect_item(item, md_lines, target_desc, gateway=None, context=None, offici
                 fix_run = probe.pip_result(probe.pip_check(fix))
             elif kind == "code":
                 fix_run = pipeline.run_with_context(fix, md_lines, s0)
-            if fix_run and fix_run["status"] != "ok":
+            # 실패·시간 초과만 거절해요. 네트워크 차단(needs_api)·격리 환경 없음은 검증 불가로 보고 받아요(pipeline과 같은 기준).
+            if fix_run and fix_run["status"] in ("fail", "timeout"):
                 reasons.append("the fix failed in the target environment: " + str(fix_run.get("detail", ""))[:300])
         s.step(name, {"verdict": verdict}, {"accepted": not reasons, "reasons": reasons})
         state["last"] = {**v, "fix": fix, "_reasons": reasons}

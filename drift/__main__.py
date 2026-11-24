@@ -31,7 +31,7 @@ def main():
     out = report.write_all(result, md, a.source, a.out or f"out/{Path(a.source).stem}")
     for r in result["items"]:
         v = r["verdict"]
-        print(f"{report.ICON[v['verdict']]} {r['item']['lines']} {r['item']['id']}: {v.get('reason', '')[:80]}"
+        print(f"{report.ICON[v['verdict']]} {r['item']['lines']} {r['item']['id']}: {(v.get('reason') or '')[:80]}"
               + (f"  [오류: {r['error']}]" if r.get("error") else ""))
     print(f"\n{result['seconds_total']}s · 결과: {out}/report.html")
     print(json.dumps({"api_calls": len(result['trace'])}))

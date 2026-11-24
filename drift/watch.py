@@ -1,7 +1,7 @@
 """책 저장소 감시기 — 라이브러리 새 버전을 감지하면 Liner 에이전트로 책을 개정하고 PR을 열어요.
 
-    python -m drift.watch --repo makepluscode/living-book-demo --once            # 1회 확인
-    python -m drift.watch --repo makepluscode/living-book-demo --interval 600   # 10분마다 감시
+    python -m drift.watch --repo makepluscode/vivo-books-sample-book --once            # 1회 확인
+    python -m drift.watch --repo makepluscode/vivo-books-sample-book --interval 600   # 10분마다 감시
     python -m drift.watch --repo ... --once --dry-run                           # PR 없이 브랜치·본문만 만들어 보기
 
 흐름: 책 저장소 받기 → book.json `watch`의 PyPI 패키지 최신 버전 확인 → 책에 고정된 버전(pins)과 다르면

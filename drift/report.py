@@ -52,10 +52,10 @@ def errata_md(result, source_name):
         if v["verdict"] == "GREEN" or v.get("merged_into"):
             continue
         s, e = r["item"]["lines"]
-        cites = [c for c in v.get("citations", []) if c.get("valid")]
+        cites = [c for c in (v.get("citations") or []) if c.get("valid")]
         links = " ".join(f"[{i}]({_safe_url(c['url'])})" for i, c in enumerate(cites, 1)) or "—"
         out.append(f"| {s}–{e}줄 | {ICON[v['verdict']]} {LABEL[v['verdict']]} | "
-                   f"{r['item'].get('subject', '')}: {v.get('reason', '').replace('|', '/')} | {links} |")
+                   f"{r['item'].get('subject', '')}: {(v.get('reason') or '').replace('|', '/')} | {links} |")
     out += ["", ("> 수정안은 Liner 검색 근거와 목표 환경의 심볼 확인을 바탕으로 만든 **검토용 제안**이에요. "
                  "실제 실행 검증 전에는 저자·편집자가 확인해 주세요.")]
     return "\n".join(out) + "\n"
@@ -72,7 +72,7 @@ def html_report(result, md, source_name, diff_text, applied):
     trace = result["trace"]
     n_search = sum(1 for t in trace if t["api"] == "search")
     n_agent = sum(1 for t in trace if t["api"] == "search_agent")
-    n_router = sum(1 for t in trace if t["api"] in ("extract", "judge", "merge"))
+    n_router = sum(1 for t in trace if t["api"] in ("extract", "judge", "merge", "agent-inspect", "agent-router", "router"))
     models = sorted({t.get("served_model") for t in trace if t.get("served_model")})
     cards = []
     for r in _sorted(result["items"]):
@@ -84,7 +84,7 @@ def html_report(result, md, source_name, diff_text, applied):
             f" <span class='src'>{'Search Agent' if c.get('source') == 'search_agent' else 'Search'}</span>"
             f"{'' if c.get('quote_found') else ' <span class=warn>인용 불일치</span>'}"
             f"<blockquote>{_h(c.get('quote'))}</blockquote></li>"
-            for c in v.get("citations", []) if c.get("valid"))
+            for c in (v.get("citations") or []) if c.get("valid"))
         probes = "".join(
             f"<li><code>{_h(k)}</code> — {'✅ 있음' if p.get('exists') else ('❔ 확인 불가' if p.get('exists') is None else '❌ 없음')}"
             f"{' · ⚠️ 폐기 표시' if p.get('deprecated') else ''}</li>"

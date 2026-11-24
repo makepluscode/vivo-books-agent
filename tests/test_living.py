@@ -178,6 +178,17 @@ print(answer_city("Seoul"))'''
         self.assertIn("create_agent로 구성", updated)
         self.assertIn("날씨 도구는 고정된 값을 돌려줘요.", updated)
         self.assertEqual(living.example(original).count("create_react_agent("), 1)
+        agent_html = living.evidence_html({"preview_created": True, "target": {}, "trace": [], "items": [{
+            "chapter_id": "chapter07", "status": "verified-change",
+            "after": {"status": "ok", "agent_flow_verified": True, "tool_result_dependency_verified": True,
+                      "unseen_input_verified": True, "execution_count": 5}}]})
+        self.assertIn("실행 5회 (세 도시 3회 + 도구 응답 변경 1회 + 처음 보는 도시 최종 AI 답 1회)", agent_html)
+        stdout_html = living.evidence_html({"preview_created": True, "target": {}, "trace": [], "items": [{
+            "chapter_id": "chapter04", "status": "verified-change",
+            "after": {"status": "ok", "prompt_chain_verified": True, "runnable_chain_verified": True,
+                      "input_dependency_verified": True, "execution_count": 3}}]})
+        self.assertNotIn("에이전트 경유", stdout_html)
+        self.assertIn("체인 경유", stdout_html)
 
     def test_local_path_cannot_escape_book(self):
         with self.assertRaises(ValueError):

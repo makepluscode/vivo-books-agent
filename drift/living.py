@@ -646,7 +646,9 @@ def evidence_html(result, include_uncited=True):
                                          "weather 호출: " + ", ".join(str(v) for v in (after.get("tool_calls") or []))])) + '</pre>')
             parts.append('<p>에이전트 경유: ' + _escape_html(after.get("agent_flow_verified", "기록 없음"))
                          + ' · 도구 응답 변경 시 최종 답 반영: ' + _escape_html(after.get("tool_result_dependency_verified", "기록 없음"))
-                         + ' · 실행 ' + _escape_html(after.get("execution_count", "기록 없음")) + '회 (세 도시 + 응답 변경 확인 1회)</p>')
+                         + ' · 실행 ' + _escape_html(after.get("execution_count", "기록 없음"))
+                         + ('회 (세 도시 3회 + 도구 응답 변경 1회 + 처음 보는 도시 최종 AI 답 1회)</p>'
+                            if "unseen_input_verified" in after else '회 (세 도시 + 응답 변경 확인 1회)</p>'))
             observed = after.get("tool_result_observation") or {}
             if observed.get("before") is not None:
                 parts.append('<p>도구 응답 변경 전후의 최종 답</p><pre>'
@@ -846,7 +848,10 @@ def revise_prose(ch, md, target, pins, context, gateway, push):
                   if it.get("kind") == "sentence"]
     touched = set(synced_lines) | set(ch.get("local_prose_lines", ()))
     for it in candidates:
-        it["lines"] = [max(1, int(it["lines"][0])), min(len(lines), int(it["lines"][1]))]
+        try:
+            it["lines"] = [max(1, int(it["lines"][0])), min(len(lines), int(it["lines"][1]))]
+        except (KeyError, IndexError, TypeError, ValueError):  # 줄 범위가 없거나 깨진 후보는 건너뛰어요
+            continue
         span = set(range(it["lines"][0], it["lines"][1] + 1))
         if not span or span & touched:
             continue

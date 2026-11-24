@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 from test_living import DESCRIPTION, EVIDENCE, GOOD_CODE, PLAN, two_chapter_book
 
-from drift import agent, living
+from drift import agent, living, report
 
 RULES = [("docs.langchain.com", "/"), ("github.com", "/langchain-ai/langchain")]
 
@@ -185,6 +185,12 @@ class InspectItemTests(unittest.TestCase):
         self.assertEqual(v["citations"][0]["evidence"], 1)
         self.assertTrue(v["citations"][0]["quote_found"])
         self.assertEqual(rec["evidence"][0]["source"], "search:official")
+        html = report.html_report({"target": "pandas 3", "items": [rec], "seconds_total": 1.0,
+                                   "trace": [{"api": "extract", "seconds": 0.2},
+                                             {"api": "agent-inspect", "seconds": 0.4},
+                                             {"api": "agent-inspect", "seconds": 0.4}]},
+                                  "\n".join(MD), "chapter03.md", "", [])
+        self.assertIn("Router 3회", html)
 
     def test_unofficial_only_evidence_is_held_as_unknown(self):
         rec = self.inspect([call("liner_search", {"query": "q"})] + [self.submit("YELLOW", "DataFrame.append has been removed", cid=f"c{i}") for i in range(3)],

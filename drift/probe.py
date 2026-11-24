@@ -179,17 +179,21 @@ _SPEC = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*(\[[A-Za-z0-9,._-]+\])?((==|>=|<
 
 
 def pip_specs(command):
-    """단순 패키지 설치 명령만 확인해요. 옵션·URL·경로가 있으면 보류해요."""
-    try:
-        tokens = shlex.split(command.replace("\\\n", " "), comments=True)
-    except ValueError:
-        return []
-    if tokens[:2] in (["pip", "install"], ["pip3", "install"]):
-        specs = tokens[2:]
-    elif tokens[:4] in (["python", "-m", "pip", "install"], ["python3", "-m", "pip", "install"]):
-        specs = tokens[4:]
-    else:
-        return []
+    """단순 패키지 설치 명령만 확인해요. 옵션·URL·경로가 있으면 보류해요. 여러 줄이면 줄마다 읽어요."""
+    specs = []
+    for line in command.replace("\\\n", " ").splitlines():
+        try:
+            tokens = shlex.split(line, comments=True)
+        except ValueError:
+            return []
+        if not tokens:
+            continue
+        if tokens[:2] in (["pip", "install"], ["pip3", "install"]):
+            specs += tokens[2:]
+        elif tokens[:4] in (["python", "-m", "pip", "install"], ["python3", "-m", "pip", "install"]):
+            specs += tokens[4:]
+        else:
+            return []
     return specs if len(specs) <= 12 and all(_SPEC.fullmatch(t) for t in specs) else []
 
 

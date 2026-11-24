@@ -159,16 +159,33 @@ def emit(kind, **kw):
 
 
 def code_blocks(md_lines):
-    """```python 블록의 (시작줄, 끝줄) 목록(펜스 제외, 1부터)."""
-    out, start = [], None
+    """```python 블록의 (시작줄, 끝줄) 목록(펜스 제외, 1부터). 다른 언어 블록의 닫는 펜스를 여는 펜스로 보지 않아요."""
+    out, start, inside = [], None, False
     for i, line in enumerate(md_lines, 1):
         t = line.strip()
-        if t.startswith("```") and start is None and t[3:].strip() in ("python", "py", ""):
-            start = i + 1
-        elif t.startswith("```") and start is not None:
-            out.append((start, i - 1))
-            start = None
+        if not t.startswith("```"):
+            continue
+        if not inside:
+            inside = True
+            start = i + 1 if t[3:].strip() in ("python", "py", "") else None
+        else:
+            if start is not None:
+                out.append((start, i - 1))
+            inside, start = False, None
     return out
+
+
+def norm_lines(lines, n):
+    """추출기가 준 줄 범위를 원고 안의 [시작, 끝](1부터)으로 맞춰요. 쓸 수 없는 값이면 None."""
+    try:
+        s, e = (list(lines if isinstance(lines, (list, tuple)) else [lines]) + [None])[:2]
+        s = int(s)
+        e = s if e is None else int(e)
+    except (TypeError, ValueError):
+        return None
+    s, e = sorted((s, e))
+    s, e = max(1, s), min(n, e)
+    return [s, e] if s <= e else None
 
 
 def run_with_context(code, md_lines, line_start):
@@ -205,7 +222,7 @@ def inspect_item(item, md_lines, target_desc, escalate=True):
         rec["pip"] = probe.pip_check(code)
         rec["run"] = probe.pip_result(rec["pip"])
         emit("run", item=iid, which="original", **rec["run"])
-    if item.get("kind") == "code":
+    elif item.get("kind") == "code":  # pip 명령 블록은 Python으로 다시 실행하지 않아요(agent.py와 같은 규칙)
         emit("stage", item=iid, stage="run")
         rec["run"] = run_with_context(code, md_lines, s)
         emit("run", item=iid, which="original", **{k: rec["run"].get(k) for k in ("status", "detail")})
@@ -240,6 +257,9 @@ def inspect_item(item, md_lines, target_desc, escalate=True):
             if verdict.get("fix"):
                 rec["fix_probe"] = probe.probe(probe.symbols_from_code(verdict["fix"]))
                 rec["fix_run"] = run_with_context(verdict["fix"], md_lines, s)
+            else:  # 버린 수정안의 실패 기록을 남기지 않아요
+                rec.pop("fix_run", None)
+                rec.pop("fix_probe", None)
     if verdict.get("fix") and "pip" in rec:  # pip 수정안도 실제 설치 시도로 확인
         rec["fix_pip"] = probe.pip_check(verdict["fix"])
         rec["fix_run"] = probe.pip_result(rec["fix_pip"])
@@ -257,10 +277,13 @@ def run(md, target_desc, escalate=True, workers=4, mode="pipeline"):
     items = extract(md, target_desc)
     t_extract = time.perf_counter() - t0
     md_lines = md.splitlines()
+    kept = []
     for it in items:
-        s, e = (list(it.get("lines") or [1, 1]) + [None])[:2]
-        e = e or s
-        it["lines"] = [max(1, int(s)), min(len(md_lines), int(e))]
+        span = norm_lines(it.get("lines") or [1, 1], len(md_lines))
+        if span:  # 범위를 알 수 없는 항목은 원고를 잘못 고치지 않도록 빼요
+            it["lines"] = span
+            kept.append(it)
+    items = kept
     emit("items", items=[{"id": it["id"], "lines": it["lines"], "kind": it.get("kind"), "subject": it.get("subject"),
                           "query": it.get("query")} for it in items], seconds=round(t_extract, 2))
     with ThreadPoolExecutor(workers) as ex:
@@ -288,7 +311,10 @@ def merge_same_span(recs, md_lines):
         try:
             js, _ = liner.router_json(MERGE_SYSTEM, f"원문:\n{orig}\n\n{fixes}", item_id=rs[0]["item"]["id"], step="merge")
             rs[0]["verdict"]["fix"] = js["fix"]
-            if rs[0]["item"].get("kind") == "code":  # 병합 결과를 다시 검증
+            if "pip" in rs[0]:  # 병합한 설치 명령도 다시 설치 모의 실행
+                rs[0]["fix_pip"] = probe.pip_check(js["fix"])
+                rs[0]["fix_run"] = probe.pip_result(rs[0]["fix_pip"])
+            elif rs[0]["item"].get("kind") == "code":  # 병합 결과를 다시 검증
                 rs[0]["fix_probe"] = probe.probe(probe.symbols_from_code(js["fix"]))
                 rs[0]["fix_run"] = run_with_context(js["fix"], md_lines, span[0])
             for r in rs[1:]:

@@ -45,6 +45,15 @@ class PackagedSnapshotTest(unittest.TestCase):
             self.assertEqual(status, 200)
             self.assertTrue(got.startswith(ctype))
             self.assertTrue(body)
+        status, _, page_bytes = self.get("/living")
+        page = page_bytes.decode("utf-8")
+        self.assertEqual(status, 200)
+        self.assertIn("'agent_flow_verified' in a", page)
+        self.assertIn("prompt_chain_verified", page)
+        self.assertIn("로컬 모델 이름 정하기", page)
+        self.assertIn("도구를 쓰는 날씨 에이전트", page)
+        self.assertNotIn("올라마로 첫 대화 준비하기", page)
+        self.assertNotIn("기상학자 에이전트", page)
 
     def test_local_run_wins_unless_packaged_only(self):
         run = Path(self.empty.name) / "demo"

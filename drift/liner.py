@@ -43,7 +43,11 @@ def _post(path, body, timeout, retries=2):
     for attempt in range(retries + 1):
         r = requests.post(f"{BASE}{path}", headers={"x-api-key": _key()}, json=body, timeout=timeout)
         if (r.status_code == 429 or r.status_code >= 500) and attempt < retries:
-            time.sleep(float(r.headers.get("Retry-After", 2 * (attempt + 1))))
+            try:
+                wait = float(r.headers.get("Retry-After", 2 * (attempt + 1)))
+            except ValueError:  # HTTP 날짜 형식이면 기본 대기
+                wait = 2 * (attempt + 1)
+            time.sleep(min(wait, 30))
             continue
         r.raise_for_status()
         return r.json(), attempt
@@ -90,7 +94,7 @@ def router_json(system, user, item_id=None, step="router"):
     _log({"api": step, "item": item_id, "router": ROUTER_MODEL, "served_model": resp.model,
           "seconds": round(time.perf_counter() - t, 2),
           "prompt_tokens": u.prompt_tokens if u else None,
-          "completion_tokens": u.completion_tokens if u else None})
+          "completion_tokens": u.completion_tokens if u else None, "cost_usd": _cost(resp.model, u)})
     return parse_json(text), text
 
 
@@ -99,6 +103,12 @@ PRICES = {"claude-haiku-5.5": (0.1, 0.5), "claude-sonnet-5.5": (2, 10), "claude-
           "claude-fable-5.1": (10, 50), "gpt-6-luna": (0.1, 0.5), "gpt-6.1-terra": (1, 5),
           "gpt-6.1-sol": (2, 10), "gpt-6-astra": (10, 50), "gemini-3.5-flash-lite": (0.3, 2.5),
           "gemini-3.8-flash": (0.75, 3.75), "gemini-4-argon": (2, 10)}
+
+
+def _cost(model, usage):
+    price = PRICES.get(model)
+    return (round((usage.prompt_tokens * price[0] + usage.completion_tokens * price[1]) / 1e6, 5)
+            if usage and price else None)
 
 
 def router_chat(messages, tools, item_id=None, step="agent-router"):
@@ -119,9 +129,7 @@ def router_chat_ex(messages, tools, item_id=None, step="agent-router"):
                                   "function": {"name": c.function.name, "arguments": c.function.arguments}}
                                  for c in m.tool_calls]
     u = resp.usage
-    price = PRICES.get(resp.model)
-    cost = (round((u.prompt_tokens * price[0] + u.completion_tokens * price[1]) / 1e6, 5)
-            if u and price else None)
+    cost = _cost(resp.model, u)
     _log({"api": step, "item": item_id, "router": ROUTER_MODEL, "served_model": resp.model,
           "seconds": round(time.perf_counter() - t, 2),
           "prompt_tokens": u.prompt_tokens if u else None,
@@ -135,4 +143,15 @@ def parse_json(text):
     if start < 0:
         raise ValueError(f"JSON 없음: {text[:200]}")
     end = max(s.rfind("}"), s.rfind("]"))
-    return json.loads(s[start:end + 1])
+    try:
+        return json.loads(s[start:end + 1])
+    except json.JSONDecodeError:
+        # 앞뒤 설명에 괄호가 섞인 경우(```json 펜스, '근거 [1]' 등): 객체부터 하나씩 읽어 봐요.
+        dec = json.JSONDecoder()
+        for ch in "{[":
+            for i in (j for j, c in enumerate(s) if c == ch):
+                try:
+                    return dec.raw_decode(s, i)[0]
+                except json.JSONDecodeError:
+                    pass
+        raise

@@ -87,7 +87,7 @@
 
 ## 4차 — GitHub 책 저장소 감시 → 본문 최신화 → PR
 
-목업 책을 GitHub 저장소 [`makepluscode/living-book-demo`](https://github.com/makepluscode/living-book-demo)로 만들고 `drift.watch`로 감시했어요.
+목업 책을 GitHub 저장소 `makepluscode/living-book-demo`(당시 비공개 실험 저장소, 현재 비공개)로 만들고 `drift.watch`로 감시했어요.
 책에는 본문 장(1장)을 추가했어요. 설치 명령, "이 책은 LangChain 0.3.25 기준" 같은 버전 문장, 다른 장을 소개하는 문장이 들어 있어요.
 
 | 단계 | 결과 |
@@ -95,7 +95,7 @@
 | 감지 | PyPI `langchain` 0.3.25 → 1.5.2, `langchain-core` 0.3.61 → 1.8.4 |
 | 1장 본문 | 버전 문장·설치 명령 2곳을 **검증한 목표 버전**(1.5.0 / 1.8.1)으로 동기화하고, pip 설치 시도로 확인 · 4장·7장 소개 문장 2곳을 공식 문서 근거로 수정(같은 개정의 4·7장 결과를 맥락으로 전달) · 테스트 모델 문장 1곳은 판단 보류(원문 유지) |
 | 4·7장 예제 | 3차와 같은 방식으로 코드·설명 수정, 실행 검증 통과 |
-| PR | [living-book-demo#1](https://github.com/makepluscode/living-book-demo/pull/1) · 파일 8개(원고 3장, requirements.txt, book.json, ERRATA.md, REVISIONS.md, 개정 EPUB) |
+| PR | `living-book-demo#1`(당시 비공개 실험 저장소) · 파일 8개(원고 3장, requirements.txt, book.json, ERRATA.md, REVISIONS.md, 개정 EPUB) |
 | 중복 방지 | 같은 버전으로 다시 돌리면 "이미 처리했어요"로 끝나요 |
 
 본문 문장 수정은 두 종류로 나눠요. 버전 표기는 하네스가 실제로 검증한 사실이라 LLM 없이 확정적으로 바꿔요. API 설명 문장은 에이전트가 고치되, 공식 문서 인용이 있어야 반영해요.
